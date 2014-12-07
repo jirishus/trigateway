@@ -184,7 +184,7 @@ $http.get(baseUrl + 'users').success(function(data) {
     $timeout(function() {
       var curState = $state.$current.name;
 
-      console.log(curState);
+      //console.log(curState);
       if(curState === 'app.merchants.mids') {
          $scope.isCollapsed = false;
       } else if(curState === 'app.search' || 'app.usermananger' || 'app.virtual_terminal') {

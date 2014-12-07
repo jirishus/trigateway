@@ -45,10 +45,4 @@ div(id="wrapper")
                                 a(href="" ng-click="logOut()" tooltip="log out {{currentUser.name}}" tooltip-placement="left") 
                                     i.fa.fa-icon.fa-sign-out
                     .dash
-                        .row
-                            .col-md-4
-                                //h1(ng-cloak) {{$state.current.name}}
-                            .col-md-8
-                                //img(src="img/charts.png" class="chart_img")
-            .container-fluid.primary_content
-                div(ui-view="")
+                        div(ui-view="")
