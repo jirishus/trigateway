@@ -1,0 +1,22 @@
+.login {
+    background:#181818;
+}
+.login_box {
+    background:#eee;
+    background:none;
+    border-top:3px solid $blue;
+    border-bottom:3px solid $blue;
+    color:#fff;
+    max-width:400px;
+    margin:12% auto 0 auto;
+    padding:15px 40px;
+    input {
+        border:0px;
+        color:#333;
+        border-radius:0px;
+        background:#fff;
+        height:40px;
+        position:relative;
+        margin:5px 0;
+    }
+}

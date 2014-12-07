@@ -1,0 +1,8 @@
+.container
+    .row.login_box
+        form.form(ng-submit="loginUser()" name="loginForm" novalidate)
+            p Login To Your Acct
+            input.form-control(type="text" placeholder="Username" ng-model="loginData.userName" required="" autofocus="")
+            input.form-control(type="password" placeholder="Password" ng-model="loginData.password" required="")
+
+            button.btn.btn-primary(type="submit") Enter Portal Here
