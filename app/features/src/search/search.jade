@@ -1,1 +1,166 @@
-p search state
+.dash
+    .row
+        h1 Reports
+    .form_wrapper
+        form.form.searcher.snap-shot.panel.panel-default
+            .panel-heading
+                h2.panel-title Transaction Snapshot:
+            .panel-body
+                .row
+                    .col-md-12.col-lg-3
+                        label Start Date:
+                        .row
+                            .col-md-8
+                                //include partials/calendar1-1.jade
+                            .col-md-2
+                                select.form-control(ng-options="item as item for item in Hours" ng-model="blah")
+                                
+                            .col-md-2
+                                select.form-control(ng-options="item as item for item in Mins" ng-model="blahblah")
+                                   
+                                
+                    .col-md-12.col-lg-3
+                        label End Date:
+                        .row
+                            .col-md-8
+                                //include partials/calendar1-2.jade
+                            .col-md-2
+                                select.form-control(ng-options="item as item for item in Hours" ng-model="blah2")
+                                    
+                                
+                            .col-md-2
+                                select.form-control(ng-options="item as item for item in Mins" ng-model="blahblah2")
+                                   
+                                
+                    .col-md-6.col-lg-2
+                        label Preset Date Range:
+                        select.form-control(ng-model="snap.fromDate")
+                            option Select An Item
+                            option(value="{{Yesterday}}") Yesterday
+                            //option Last Week
+                            //option Last Month
+                            //option Last Quarter
+                            //option Last Year
+                            option(value="{{past3Days}}") Past 3 Days
+                            option(value="{{past7Days}}") Past 7 Days
+                            option(value="{{past90Days}}") Past 90 Days
+                            option(value="{{past180Days}}") Past 180 Days
+                            option(value="{{past360Days}}") Past 365 Days
+
+                    .col-md-6.col-lg-4
+                        label Gateway
+                        select.form-control
+                            option All Platforms Selected
+                            option platform 1
+                            option platform 2
+                            option platform 3
+                .row
+                    .col-md-12
+                        button.generate_results(type="submit")
+                            i.fa.fa-search
+                            span Snapshot Search
+
+        form.form.searcher.trans-form.panel.panel-default(name="transForm" ng-submit="transFormSubmit()")
+            .panel-heading
+                h2.panel-title Transaction Search:
+            .panel-body
+                .row
+                    .col-md-12.col-lg-3
+                        label Start Date:
+                        .row
+                            .col-md-8
+                                //include partials/calendar2-1.jade
+                            .col-md-2
+                                select.form-control(ng-options="item as item for item in Hours" ng-model="somemodelhere")
+                                
+                            .col-md-2
+                                select.form-control(ng-options="item as item for item in Mins" ng-model="miscModel")
+                                
+                    .col-md-12.col-lg-3
+                        label End Date:
+                        .row
+                            .col-md-8
+                                //include partials/calendar2-2.jade
+                            .col-md-2
+                                select.form-control(ng-options="item as item for item in Hours" ng-model="fillitin")
+                                
+                            .col-md-2
+                                select.form-control(ng-options="item as item for item in Mins" ng-model="thisneedstobemodel")
+                                
+                    .col-md-6.col-lg-2
+                        label Preset Date Range:
+                        select.form-control(ng-model="transForm.fromDate")
+                            option Select An Item
+                            option(value="{{Yesterday}}") Yesterday
+                            //option Last Week
+                            //option Last Month
+                            //option Last Quarter
+                            //option Last Year
+                            option(value="{{past3Days}}") Past 3 Days
+                            option(value="{{past7Days}}") Past 7 Days
+                            option(value="{{past90Days}}") Past 90 Days
+                            option(value="{{past180Days}}") Past 180 Days
+                            option(value="{{past360Days}}") Past 365 Days
+
+                    .col-md-6.col-lg-4
+                        label Gateway
+                        select.form-control(ng-model="transForm.gateway" ng-options="obj.Id as obj.DisplayName for obj in gateways")
+                            
+                .row.margin-top
+                    .col-md-3
+                        label Merchant:
+                        select.form-control(ng-model="transForm.MID" ng-options="obj.Id as obj.DisplayName for obj in mids")
+                            
+                    .col-md-3
+                        label Status:
+                        select.form-control(ng-model="transForm.Status")
+                            option Any Status
+                            option(value=0) Success
+                            option(value=1) Declined
+                            option(value=2) Error
+                    .col-md-3
+                        label Transaction Type:
+                        select.form-control(ng-model="transForm.transType")
+                            option Any Transaction Type
+                            option(value=1) Charge
+                            option(value=2) Void
+                            option(value=3) Refund
+                            option(value=4) Authorize
+                            option(value=6) Capture
+                    .col-md-3
+                        label Action Type:
+                        select.form-control
+                            option Any Action Type
+                            option option1
+                .row.margin-top
+                    .col-md-3
+                        label Transaction ID:
+                        input.form-control(type="text" placeholder="Transaction ID" ng-model="transForm.transId")
+                    .col-md-3
+                        label Order ID:
+                        input.form-control(type="text" placeholder="Order ID")
+                    .col-md-3
+                        label Last Name:
+                        input.form-control(type="text" placeholder="Last Name" ng-model="transForm.lname")
+                    .col-md-3
+                        label First Name:
+                        input.form-control(type="text" placeholder="First Name" ng-model="transForm.fname")
+                .row.margin-top
+                    .col-md-3
+                        label Email:
+                        input.form-control(type="text" placeholder="Email" ng-model="transForm.email")
+                    .col-md-3
+                        label Phone Number:
+                        input.form-control(type="text" placeholder="Phone Number" ng-model="transForm.phone")
+                    .col-md-3
+                        label Credit Card Last Four:
+                        input.form-control(type="text" placeholder="Credit Card Last Four" ng-model="transForm.CcLast4")
+                    .col-md-3
+                        label Reference Number:
+                        input.form-control(type="text" placeholder="Reference Number" ng-model="transForm.refNumber")
+
+                .row
+                    .col-md-12
+                        button.generate_results(type="submit")
+                            i.fa.fa-search
+                            span Transaction Search

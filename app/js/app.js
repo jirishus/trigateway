@@ -27,6 +27,15 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider,$httpP
         url:'/search',
         templateUrl:'../features/dest/search/search.html',
         controller:'searchCtrl'
+    })
+    .state('app.merchants', {
+        url:'/merchants',
+        templateUrl:'../features/dest/merchants/merchants.html'
+    })
+    .state('app.merchants.mids', {
+        url:'/mids',
+        templateUrl:'../features/dest/merchants/mids.html',
+        controller:'midsCtrl'
     });
 
     // REMOVE HASH(#) FROM URL
@@ -36,6 +45,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider,$httpP
     $httpProvider.interceptors.push('authInterceptorService');
 
 });
+app.constant('baseUrl', "http://api.testing.tripayments.com/");
 
 app.run(['$rootScope', '$state', '$stateParams', '$location','authService', function ($rootScope, $state, $stateParams, $location,authService,$scope) {
 

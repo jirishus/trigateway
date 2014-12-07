@@ -1,4 +1,4 @@
-app.controller("appCtrl", function($rootScope,$scope,$state,$timeout,$http) {
+app.controller("appCtrl", function($rootScope,$scope,$state,$timeout,$http,baseUrl,Notify) {
 
   /*
   $("#menu-toggle").click(function(e) {
@@ -7,12 +7,160 @@ app.controller("appCtrl", function($rootScope,$scope,$state,$timeout,$http) {
   });
   */
 
-  ////////////////////
-  // LOAD MID-GROUPS
-  ////////////////////
-  $http.get('http://api.testing.tripayments.com/midgroups').success(function(data) {
-    console.log(data);
+  ///////////////////
+    // LOAD MIDGROUPS
+    ///////////////////
+    $rootScope.modalGroups = [];
+
+
+    $http.get(baseUrl + 'midgroups').success(function(data) {
+
+      $scope.groupsBulk = data;
+      $scope.groupAmount = data.length;
+      // CSV Export
+      $scope.groupCSV = data;
+      // copy the references
+      //$scope.shownMerchants = [].concat($scope.groupsBulk);
+
+      angular.forEach(data, function(value,key) {
+         $rootScope.modalGroups.push(value);
+      });
+
+    });
+
+
+  //////////////////////
+  // NOTIFY ADD MERCHANT
+  //////////////////////
+  Notify.getMsg('NewMerchant', function(event,data) {
+    $scope.groupsBulk.push(data);
   });
+
+  ///////////////////
+  // LOAD CURRENCIES
+  ///////////////////
+ 
+  $http.get(baseUrl + 'currencies').success(function(data) {
+      $scope.currencies = data;
+      
+  });
+
+
+  ///////////////////
+  // LOAD GATEWAYS
+  ///////////////////
+  $rootScope.gateways = [];
+
+  $http.get(baseUrl + 'gateways').success(function(data) {
+    
+    $scope.gateways = data; 
+    
+    angular.forEach(data, function(value,key) {
+            $rootScope.gateways.push(value);
+    });
+      
+  });
+
+
+  ///////////////////
+  // LOAD MIDS
+  ////////////////////
+
+  $http.get(baseUrl + 'mids').success(function(data) {
+
+    //console.log(data);
+    
+    $scope.mids = data;
+    $scope.shownMids = $scope.mids;
+    $scope.dataLen = data.length;
+
+    $scope.clients = data;
+
+    // FORMAT GROUPS FOR POPOVER DISPLAY
+    $scope.groupNames = [];
+
+
+    for(var i=0;i<data.length;i++) {
+       //console.log(data[i].GroupMembership);
+       $scope.groupNames.push(data[i].GroupMembership);
+
+    }
+
+    ////////////////////
+    //    CSV EXPORT
+    ////////////////////
+    $scope.midsCSV = data;
+
+
+    ////////////////////
+    //    REMOVE MID
+    ////////////////////
+    Notify.getMsg('removedMid', function(event,index) {
+
+        $http.get(baseUrl + 'mids').success(function(data) {
+            $scope.mids = data;
+            $scope.shownMids = $scope.mids;
+            $scope.dataLen = data.length;
+        });
+
+        //console.log('view should update');
+
+    });
+
+
+    ////////////////////
+    //    DISABLE MID
+    ////////////////////
+    Notify.getMsg('DeleteMid', function(event,index) {
+        
+        $scope.shownMids.splice(index,1);
+
+        $http.get(baseUrl + 'mids').success(function(data) {
+            $scope.mids = data;
+            $scope.shownMids = $scope.mids;
+            $scope.dataLen = data.length;
+        });
+
+    });
+
+
+
+    ////////////////////
+    //    NEW MID
+    ////////////////////
+    Notify.getMsg('NewMidCreated', function(event,data) {
+
+        $http.get(baseUrl + 'mids').success(function(data) {
+            $scope.mids = data;
+            $scope.shownMids = $scope.mids;
+            $scope.dataLen = data.length;
+        });
+
+    });
+
+  }); // END GET
+
+  
+  //////////////////////////
+  // NOTIFY DELETE MERCHANT
+  //////////////////////////
+  Notify.getMsg('RemoveMerchant', function(event,data) {
+    $scope.groupsBulk.splice(data,1);
+  });
+
+
+
+///////////////////
+// LOAD USERS
+///////////////////
+$http.get(baseUrl + 'users').success(function(data) {
+  $scope.Users = data;
+  $scope.shownUsers = $scope.Users;
+
+  
+  // CSV Export
+  $scope.usersCSV = data;
+});
 
 
   ////////////
