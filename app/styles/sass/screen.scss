@@ -11,8 +11,12 @@
 
 
 body {
-    
+    background:#f7f7f7;
+    font-family:helvetica;
+    font-weight:300;
 }
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 // LOADING BAR
 #loading-bar .bar {
@@ -134,7 +138,7 @@ body {
             }
         }
     }
-    
+}
 
 
 .sidebar-nav li a:active,
@@ -198,7 +202,6 @@ body {
 }
 
 
-// ORIGINAL SCREEN.SCSS
 [ng-class='true'] {
       background:#f7f7f7;
       color:#333 !important;
@@ -212,145 +215,9 @@ body {
             width:5px;
         }
 }
-a[class*='merchants'] {
-  background:#f7f7f7;
-  &:after {
-            background:$in_yellow;
-            content:"";
-            position:absolute;
-            top:0;
-            left:0;
-            height:100%;
-            width:5px;
-        }
-}
-a[class*='midsmids'] {
-  font-weight:800;
-  &:after {
-            background:$in_blue;
-            content:"";
-            position:absolute;
-            top:0;
-            left:0;
-            height:100%;
-            width:5px;
-        }
-}
-a[class*='groupsgroups'] {
-  font-weight:800;
-  &:after {
-            background:$in_blue;
-            content:"";
-            position:absolute;
-            top:0;
-            left:0;
-            height:100%;
-            width:5px;
-        }
-}
-
-
-body {
-    background:#f7f7f7;
-    font-family:helvetica;
-    font-weight:300;
-    //@include box-sizing(content-box);
-}
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
-
-.nopad {
-  padding:0;
-}
-
-.def_btn {
-  border:0;
-  color:#fff;
-  display:inline-block;
-  padding:12px 20px;
-  font-size:12px;
-  cursor:pointer;
-   &:hover {
-    color:#fff;
-    text-decoration:none;
-   }
-   i {
-    padding-right:4px;
-   }
-   span {
-    @media(max-width:1800px) {
-        display:none;
-     }
-   }
-  
-}
-
- 
-
-.margin-right{
-  margin-right: 5px;
-}
-.float-right{
-  float:right;
-}
-.peter_river_btn{
-  background:$peterriver;
-   &:hover {
-    background:$belizehole;
-   }  
-}
-.belize_hole_btn{
-  background:$belizehole;
-   &:hover {
-    background:$peterriver;
-   }  
-}
-.turquoise_btn{
-  background:$turquoise;
-   &:hover {
-    background:$greensea;
-   }
-}
-.alazarin_btn{
-  background:$alizarin;
-   &:hover {
-    background:$pomegranate; 
-  } 
-}
-.wet_asphalt_btn{
-    background:$wetasphalt;
-    &:hover {
-        background:$midnightblue;
-   }  
-}
-.emerald_btn{
-  background:$nephritis;
-   &:hover {
-    background:$emerald;
-   }  
-}
-.orange_btn{
-  background:$orange;
-   &:hover {
-    background:$sunflower;
-   }  
-}
-.disabled_btn{
-  background:$silver;
-}
-
-
-.full_width{
-  width:100%;
-}
-
-
-/* PRIMARY CONTENT */
-
-.well {
-  border-radius:0px;
-}
-
-/* DASH HEADER */
+////////////////
+// DASH HEADER
+////////////////
 .dash_header {
     background:#fff;
     color:$gray;
@@ -439,6 +306,7 @@ body {
       border-right:10px solid $softbase;
     }
 }
+
 
 /* DASHBOARD STATE */
 .transaction_overview {
@@ -920,8 +788,43 @@ ul.mids_subNav {
    color:#fff;
    padding:15px 0;
 }
-.response_row {
+.response_row{
    color:#fff;
    padding:15px 0;
 }
+
+//////////////////
+// LIST STATE
+/////////////////
+.listView {
+
+  /* numbered buttons */
+  #status-buttons                 {  }
+  #status-buttons a               { color:#FFF; display:inline-block; font-size:12px; margin-right:10px; text-align:center; text-transform:uppercase; }
+  #status-buttons a:hover         { text-decoration:none; }
+  #status-buttons span            { background:#080808; display:block; height:30px; margin:0 auto 10px; padding-top:5px; width:30px; 
+    border-radius:50%; }
+
+  #status-buttons a.active span {
+    background:$in_blue;
+  }
+
+  #signup-form {
+    background:#eee;
+    position:relative;
+    min-height:300px;
+    overflow:hidden;
+    padding:30px;
+  }
+
+  #form-views.ng-enter
+  #form-views.ng-leave {
+    /*
+    position:absolute;
+    left:30px;
+    right:30px;
+    @include transition(all 0.5s ease);
+    */
+  }
+
 }

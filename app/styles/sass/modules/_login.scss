@@ -20,3 +20,91 @@
         margin:5px 0;
     }
 }
+
+
+.forgot {
+    display:inline-block;
+    margin-top:15px;
+}
+
+
+section.copyright {
+    margin-top:30px;
+    text-align:center;
+    p {
+        color:#ccc;
+        font-size:14px;
+        margin-bottom:5px;
+    }
+}
+.login_dash {
+    p {
+        font-size:13px;
+        margin:0px 0 10px 0;
+    }
+}
+
+
+//////////
+// RESET
+//////////
+.reset,.reset_email,.reset_success {
+    p.reset_info {
+        font-size:15px;
+        line-height:1.6;
+        .highlight{
+            text-decoration:underline;
+        }
+    }
+}
+.reset {
+    .login_error_msg {
+        margin-top:10px;
+    }
+}
+////////////////////////////
+// RESET EMAIL CONFIRMATION
+////////////////////////////
+.reset_email,.reset_success {
+    .success  {
+        background:$greensea;
+        color:#fff;
+        font-size:18px !important;
+        padding:12px 0;
+    }
+}
+////////////////////////////
+// RESET EMAIL SUCCESS
+////////////////////////////
+.reset_success {
+    a.backtoLogin {
+        background: #447dc0;
+        border-radius: 0;
+        border: 0;
+        min-height: 55px;
+        text-transform: uppercase;
+        line-height:3;
+    }
+    .success {
+        /*
+        background:none;
+        color:$greensea;
+        */
+        margin-bottom:15px;
+        margin-top:15px;
+    }
+    .success+p {
+        margin-bottom:60px;
+    }
+}
+////////////////////////////
+// RESET PASSWORD
+////////////////////////////
+.reset_password {
+    .user_help, .user_help_pass {
+        display:none;
+        p {
+            margin-top:15px;
+        }
+    }
+}
