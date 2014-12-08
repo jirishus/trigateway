@@ -3,11 +3,11 @@ html(lang="en" ng-app="myApp")
     head
         meta(charset="UTF-8")
         title Tri-Portal Go
-
+        link(href="bower_components/angular-loading-bar/src/loading-bar.css" rel="stylesheet")
         link(href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css")
         link(href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css")
         link(href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css")
-        link(href="bower_components/angular-loading-bar/src/loading-bar.css" rel="stylesheet")
+        
 
         link(href="styles/stylesheets/screen.css" rel="stylesheet" type="text/css")
     body(class="{{$state.current.name}}" ng-controller="indexCtrl")

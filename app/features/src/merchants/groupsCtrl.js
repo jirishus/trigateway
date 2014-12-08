@@ -1,13 +1,7 @@
 app.controller('groupsCtrl', function($timeout,$filter,$rootScope,$scope,$http,$state,baseUrl,Notify,$location) {
 
-  
-
   $scope.shownMerchants = $scope.groupsBulk;
   
-
-  
-  
-
   // LOAD MIDS INTO NESTED TABLE
   $scope.loadMIDS = function(id,merchant,item) {
     

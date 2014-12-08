@@ -42,6 +42,7 @@ app.controller("appCtrl", function($rootScope,$scope,$state,$timeout,$http,baseU
  
   $http.get(baseUrl + 'currencies').success(function(data) {
       $scope.currencies = data;
+      console.log(data);
       
   });
 
@@ -216,14 +217,13 @@ $http.get(baseUrl + 'users').success(function(data) {
 ////////////////
 // INDEX CTRL
 ////////////////
-app.controller('indexCtrl', ['$scope', '$location', 'authService','$http', function ($scope, $location, authService,$http) {
+app.controller('indexCtrl', ['$scope', '$location', 'authService','$http','baseUrl', function ($scope, $location, authService,$http) {
  
-
     $scope.logOut = function () {
         authService.logOut();
         $location.path('/login');
     }
  
     $scope.authentication = authService.authentication;
-
+    
 }]); // end indexCtrl

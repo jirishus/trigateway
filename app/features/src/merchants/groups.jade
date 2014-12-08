@@ -1,6 +1,7 @@
-.dash
-    .row
-        h1 Merchant Accounts - Management MID Groups
+include ../modals/merchantCreateModal.jade
+
+.row
+  h1 Merchant Accounts - Management MID Groups
 .merchant_view
   .panel.panel-default
     .panel-heading
@@ -56,7 +57,7 @@
                     tr
                       td.pushToggle(colspan="6")
                         accordion-group(heading="" ng-click="loadMIDS(merchant.Id,merchant)" is-open="merchant.open")
-                          table.table
+                          table.table.table-striped
                             thead
                               tr
                                 th MID Name
