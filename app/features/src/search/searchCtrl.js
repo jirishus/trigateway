@@ -543,3 +543,8 @@ var voidModalInstanceCtrl = function($scope,$modalInstance,trans,$http,$timeout,
 
   } // process void 
 };
+
+// TabsDemoCtrl
+app.controller('TabsDemoCtrl', function($scope) {
+  
+});

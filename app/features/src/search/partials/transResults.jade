@@ -3,12 +3,20 @@
         .panel-heading
             .row
                 .col-md-6
-                    h2.panel-title Transaction Results
-                        span # of transations
+                    h2.panel-title
+                        span {{dataLen}} results
                 .col-md-6
-                    p action buttons
+                    a.def_btn.wet_asphalt_btn.float-right.margin-right(ng-csv="transactionCSV" filename="transactions.csv" ng-show="transactionCSV.length")
+                        i.fa.fa-file
+                        span Export Excel
+                    a.def_btn.belize_hole_btn.float-right.margin-right(ng-click="new_search()")
+                        i.fa.fa-search
+                        span New Search
+                    a.def_btn.peter_river_btn.float-right.margin-right(ng-click="modify_search()")
+                        i.fa.fa-search-plus
+                        span Modify Search
         .panel-body
-            accordion
+            accordion(close-others="oneAtATime")
                 table.table(st-table="shownData" st-safe-src="transData")
                     thead
                         tr
@@ -41,53 +49,70 @@
                             td {{tran.Amount}}
                             td {{tran.PaymentTypeName}}
                             td {{tran.CcLastFour}}
-                            td Status Output
+                            //td {{returnStatus(tran)}}
+                            td
+                                a.groupAnchor(href="")
+                                    span(ng-class="(tran.ResultCode === 0) ? 'success' : 'failed' ") {{returnStatus(tran)}}
+                                    i.fa.fa-info-circle
+                                    div.floater
+                                        ul
+                                            li {{tran.ResponseDescription}}
                             td {{tran.FirstName}}
                             td {{tran.LastName}}
                             td {{tran.Email}}
                             td
-                                a(ng-click="open(tran)" ng-controller="refundModalCtrl")
-                                    //i.fa.fa-money
-                                    span Refund
-                                a(ng-click="open(tran)" ng-controller="voidModalCtrl")
-                                    //i.fa.fa-money
-                                    span Void
-                                a(ng-click="shownData[$index].open = !shownData[$index].open")
-                                    //i.fa.fa-eye
-                                    span Trans
+                                a.table_action_btn.peter_river_btn.margin-right(ng-click="open(tran)" ng-controller="refundModalCtrl")
+                                    i.fa.fa-money
+                                    span.btn_text Refund
+                                a.table_action_btn.alazarin_btn.margin-right(ng-click="open(tran)" ng-controller="voidModalCtrl")
+                                    i.fa.fa-ban
+                                    span.btn_text Void
+                                a.table_action_btn.peter_river_btn(ng-click="shownData[$index].open = !shownData[$index].open" ng-if="tran.RelatedTransactions")
+                                    i.fa.fa-eye
+                                    span.btn_text Trans
+                                    span {{tran.RelatedTransactions.length}}
+                                    
                             //td.paymentTypes
                                 div(ng-if="trans.Type == 'Authorize' && trans.ResultCode == 0")
-                                    a.alazarin_btn.search_width.margin-right(tooltip="Void transaction: {{trans.TransactionId}}" tooltip-placement="top" ng-click="open(trans)" href="" ng-controller="voidModalCtrl") 
+                                    a.table_action_btn.alazarin_btn.margin-right(tooltip="Void transaction: {{trans.TransactionId}}" tooltip-placement="top" ng-click="open(trans)" href="" ng-controller="voidModalCtrl") 
                                       i.fa.fa-ban
                                       span void
-                                    a.orange_btn.search_width.disabled(tooltip="Unable to refund with type as authorize" tooltip-placement="top")
+                                    a.table_action_btn.orange_btn.disabled.margin-right(tooltip="Unable to refund with type as authorize" tooltip-placement="top")
                                       i.fa.fa-money
                                       span Refund
+                                    a.table_action_btn.peter_river_btn
+                                      i.fa.fa-eye
+                                      span Trans  
 
                                 div(ng-if="trans.Type == 'Capture' || trans.Type == 'Charge' && trans.ResultCode == 0")
-                                  a.alazarin_btn.search_width.margin-right(tooltip="Void transaction: {{trans.TransactionId}}" ng-click="open(trans)" href="" ng-controller="voidModalCtrl")
+                                  a.table_action_btn.alazarin_btn.margin-right(tooltip="Void transaction: {{trans.TransactionId}}" ng-click="open(trans)" href="" ng-controller="voidModalCtrl")
                                     i.fa.fa-ban
                                     span void
-                                  a.orange_btn.search_width(tooltip="Refund transaction: {{trans.TransactionId}}" ng-click="open(trans)" href="" ng-controller="refundModalCtrl")
+                                  a.table_action_btn.orange_btn.margin-right(tooltip="Refund transaction: {{trans.TransactionId}}" ng-click="open(trans)" href="" ng-controller="refundModalCtrl")
                                     i.fa.fa-money
                                     span Refund
-  
-                                div(ng-if="trans.Type == 'Void' || trans.Type == 'Refund' || trans.Type == 'Credit' || trans.ResultCode !== 0")
-                                  a.alazarin_btn.search_width.margin-right.disabled(tooltip="Unable to void with this processed type" tooltip-placement="top")
-                                    i.fa.fa-ban
-                                    span void
-                                  a.orange_btn.search_width.disabled(tooltip="Unable to refund with this processed type" tooltip-placement="top")
-                                    i.fa.fa-money
-                                    span Refund
-                                div
-                                  a.peter_river_btn
+                                  a.table_action_btn.peter_river_btn
                                     i.fa.fa-eye
                                     span Trans
 
+  
+                                div(ng-if="trans.Type == 'Void' || trans.Type == 'Refund' || trans.Type == 'Credit' || trans.ResultCode !== 0")
+                                  a.table_action_btn.alazarin_btn.margin-right.disabled(tooltip="Unable to void with this processed type" tooltip-placement="top")
+                                    i.fa.fa-ban
+                                    span void
+                                  a.table_action_btn.orange_btn.disabled.margin-right(tooltip="Unable to refund with this processed type" tooltip-placement="top")
+                                    i.fa.fa-money
+                                    span Refund
+                                  a.table_action_btn.peter_river_btn
+                                    i.fa.fa-eye
+                                    span Trans
+
+                                  
+
                             td
                                 tr
-                                    td.pushToggle(colspan="13")
-                                        accordion-group(heading="" is-open="tran.open")
+                                    td.pushToggle(colspan="13" ng-if="tran.RelatedTransactions")
+                                        accordion-group(heading="" is-open="tran.open" collapse="isOpen")
                                             h2 
                                                 i.fa.fa-exchange
                                                 span Related Transactions
@@ -110,11 +135,21 @@
                                                         td {{thing.ApiUser}}
                                                         td {{thing.Amount}}
                                                         td {{thing.Type}}
-                                                        td {{thing.ResultCode}}
+                                                        //td {{getNestedStatus(thing)}}
+                                                        td
+                                                            a.groupAnchor(href="")
+                                                                span(ng-class="(thing.ResultCode === 0) ? 'success' : 'failed'") {{getNestedStatus(thing)}}
+                                                                i.fa.fa-info-circle
+                                                                div.floater
+                                                                    ul
+                                                                        li {{thing.ResponseDescription}}
                                                         td {{thing.Gateway}}
                                                         td {{thing.MidDisplayName}}
                                                         td {{thing.Mid}}
                                                         td {{thing.PaymentTypeName}}
                                                         td {{thing.RequestDate  | date:'shortDate'}}
-                                                        
+                        //tfoot
+                            tr
+                                td.text-center(colspan="13")
+                                    div(st-items-by-page='5', st-pagination='')                                       
                                                         
