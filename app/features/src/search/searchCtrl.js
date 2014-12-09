@@ -1,4 +1,4 @@
-app.controller('searchCtrl', function($scope,$http,$filter,baseUrl,$state) {
+app.controller('searchCtrl', function($scope,$http,$filter,baseUrl,$state,$moment) {
 
   $scope.oneAtATime = false;
 
@@ -35,18 +35,18 @@ app.controller('searchCtrl', function($scope,$http,$filter,baseUrl,$state) {
   // MOMENT JS
   /////////////
 
-  //$scope.Yesterday = $moment().subtract(1, 'days').format('L');
+  $scope.Yesterday = $moment().subtract(1, 'days').format('L');
 
   //$scope.lastWeek = $moment().subtract(7, 'days').format('L');
   //$scope.lastMonth = $moment().subtract(30, 'days').format('L');
   //$scope.lastQuar = $moment().subtract(90, 'days').format('L');
   //$scope.lastYear = $moment().subtract(365, 'days').format('L');
 
-  //$scope.past3Days = $moment().subtract(3, 'days').format('L');
-  //$scope.past7Days = $moment().subtract(7, 'days').format('L');
-  //$scope.past90Days = $moment().subtract(90, 'days').format('L');
-  //$scope.past180Days = $moment().subtract(180, 'days').format('L');
-  //$scope.past360Days = $moment().subtract(365, 'days').format('L');
+  $scope.past3Days = $moment().subtract(3, 'days').format('L');
+  $scope.past7Days = $moment().subtract(7, 'days').format('L');
+  $scope.past90Days = $moment().subtract(90, 'days').format('L');
+  $scope.past180Days = $moment().subtract(180, 'days').format('L');
+  $scope.past360Days = $moment().subtract(365, 'days').format('L');
 
   /////////////////////
   // TRANS FORM SUBMIT
