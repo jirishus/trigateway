@@ -1,4 +1,4 @@
-var app = angular.module("myApp", ['ui.router','LocalStorageModule','angular-loading-bar','ui.bootstrap','smart-table']);
+var app = angular.module("myApp", ['ui.router','LocalStorageModule','angular-loading-bar','ui.bootstrap','smart-table','ngSanitize',]);
 
 
 app.constant('ngAuthSettings', {
