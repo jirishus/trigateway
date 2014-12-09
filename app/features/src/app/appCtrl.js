@@ -42,8 +42,6 @@ app.controller("appCtrl", function($rootScope,$scope,$state,$timeout,$http,baseU
  
   $http.get(baseUrl + 'currencies').success(function(data) {
       $scope.currencies = data;
-      console.log(data);
-      
   });
 
 

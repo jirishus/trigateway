@@ -53,7 +53,7 @@ app.factory('authService', ['$q', '$injector', 'localStorageService', 'ngAuthSet
        
         // PRIOR SETTINGS
         
-        var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
+        var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password  + "&client_id=" + ngAuthSettings.clientId;
 
 
         if (loginData.useRefreshTokens) {

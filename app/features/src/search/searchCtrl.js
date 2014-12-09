@@ -1,8 +1,9 @@
-app.controller('searchCtrl', function($scope,$http,$filter,baseUrl,$state,$moment) {
+app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$state,$moment) {
 
   $scope.oneAtATime = false;
 
   // Create Dropdown Hours
+  /*
   function createHours() {
     $scope.Hours = [];
     // loop to create 00-23 range
@@ -24,12 +25,55 @@ app.controller('searchCtrl', function($scope,$http,$filter,baseUrl,$state,$momen
     }
   }
   createMins();
+  */
 
-  /////////////
-  // ACCORDION
-  /////////////
   
+  $scope.Hours = [00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+  $scope.Mins = [00, 05, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+  //////////////////////
+  // DATE RANGE SETTINGS
+  //////////////////////
+  /*
+  $scope.dateRanges = [
+      {"name":"Yesterday","value":$moment().subtract(1, 'days').format('L')},
+      {"name":"Past 3 Days","value":$moment().subtract(3, 'days').format('L')},
+      {"name":"Past 7 Days","value":$moment().subtract(7, 'days').format('L')},
+  ];
 
+
+  $scope.updateOptions = function(transForm) {
+    
+    console.log(transForm.dateOptions);
+
+  }
+  ///////////////////
+  // PROCESS OPTIONS
+  ///////////////////
+  $scope.processOptions = function(transForm) {
+
+    // THIS WILL OVERRIDE PASS RANGES
+
+    //console.log(transForm.toDate);
+    //transForm.toDate = '09/01/2014';
+    //transForm.toDate = $moment().subtract(7, 'days').format('L');
+    var fromD = transForm.fromDate;
+    var roughtoD = transForm.toDate;
+    var datefilter = $filter('date');
+    var toD = datefilter(roughtoD,'MM/dd/yy');
+
+    //console.log(fromD);
+    //console.log(toD);
+
+    //console.log(transForm);
+
+    console.log($scope.dateOptions);
+
+    //var myDateOptions = $('.myDateOptions');
+    //console.log(myDateOptions.children());
+
+  };
+  */
+  
 
   /////////////
   // MOMENT JS
@@ -63,8 +107,9 @@ app.controller('searchCtrl', function($scope,$http,$filter,baseUrl,$state,$momen
 
     // Convert Date Format
     var datefilter = $filter('date'),
-        formatDate = datefilter($scope.transForm.fromDate,'MM/dd/yy'),
-        formatDate2 = datefilter($scope.transForm.toDate, 'MM/dd/yy');
+        formatDate = datefilter($scope.transForm.fromDate,'MM/dd/yyyy'),
+        formatDate2 = datefilter($scope.transForm.toDate, 'MM/dd/yyyy');
+
 
     // QUERY OBJECT
     transQuery = {
@@ -82,7 +127,11 @@ app.controller('searchCtrl', function($scope,$http,$filter,baseUrl,$state,$momen
 
     console.log(transQuery);
 
+    console.log(formatDate + ' ' + $scope.fromHours + ':' + $scope.fromMins);
+
     // QUERY POST REQUEST
+    
+    /*
     $http({
       method:'POST',
       url:'https://api.tripayments.com/transactions/v2',
@@ -159,8 +208,10 @@ app.controller('searchCtrl', function($scope,$http,$filter,baseUrl,$state,$momen
       $('.transForm_feedback').slideDown(300);
 
     });
+    */
 
   };  // END SUBMIT
+  
 
 
   ///////////////
