@@ -110,11 +110,30 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
         formatDate = datefilter($scope.transForm.fromDate,'MM/dd/yyyy'),
         formatDate2 = datefilter($scope.transForm.toDate, 'MM/dd/yyyy');
 
+    // TIME SETTINGS
+    $scope.fromDATE = formatDate + ' ' + $scope.fromHours + ':' + $scope.fromMins;
+    $scope.toDATE = formatDate2 + ' ' + $scope.toHours + ':' + $scope.toMins;
+
+    // CHECK FROM TIME
+    if($scope.fromHours && $scope.fromMins) {
+      $scope.FROMDATE = $scope.fromDATE;
+    } else {
+      $scope.FROMDATE = formatDate;
+    }
+    
+    // CHECK TO TIME
+    if($scope.toHours && $scope.fromMins) {
+      $scope.TODATE = $scope.toDATE;
+    } else {
+      $scope.TODATE = formatDate2;
+    }
+
+
 
     // QUERY OBJECT
     transQuery = {
-      "FromDate":formatDate,
-      "ToDate":formatDate2,
+      "FromDate":$scope.FROMDATE,
+      "ToDate":$scope.TODATE,
       "TransactionType":+$scope.transForm.transType || undefined,
       "Status":+$scope.transForm.Status || undefined,
       "TransactionId":$scope.transForm.transId,
@@ -127,11 +146,8 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
 
     console.log(transQuery);
 
-    console.log(formatDate + ' ' + $scope.fromHours + ':' + $scope.fromMins);
 
     // QUERY POST REQUEST
-    
-    /*
     $http({
       method:'POST',
       url:'https://api.tripayments.com/transactions/v2',
@@ -208,7 +224,8 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
       $('.transForm_feedback').slideDown(300);
 
     });
-    */
+    
+    
 
   };  // END SUBMIT
   
