@@ -245,7 +245,13 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
     $('.form_wrapper').slideToggle(300);
   };
 
- 
+  
+  $scope.doToggle = function(item) {
+
+    //shownData[index].open = !shownData[index].open;
+    
+
+  };
   
 }); // END SEARCH CTRL
 

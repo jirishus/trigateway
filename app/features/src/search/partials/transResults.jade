@@ -67,7 +67,7 @@
                                 a.table_action_btn.alazarin_btn.margin-right(ng-click="open(tran)" ng-controller="voidModalCtrl")
                                     i.fa.fa-ban
                                     span.btn_text Void
-                                a.table_action_btn.peter_river_btn(ng-click="shownData[$index].open = !shownData[$index].open" ng-if="tran.RelatedTransactions && tran.RelatedTransactions.length > 0")
+                                a.table_action_btn.peter_river_btn(ng-click="doToggle(tran)" ng-if="tran.RelatedTransactions && tran.RelatedTransactions.length > 0")
                                     i.fa.fa-eye
                                     span.btn_text Trans
                                     span {{tran.RelatedTransactions.length}}
@@ -112,7 +112,7 @@
                             td
                                 tr
                                     td.pushToggle(colspan="13" ng-if="tran.RelatedTransactions && tran.RelatedTransactions.length > 0")
-                                        accordion-group(heading="" is-open="tran.open" collapse="isOpen")
+                                        accordion-group(heading="" is-open="true")
                                             h2 
                                                 i.fa.fa-exchange
                                                 span Related Transactions
