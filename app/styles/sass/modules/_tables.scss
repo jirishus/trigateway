@@ -273,5 +273,23 @@ select.editable-input {
     table th,table td {
         border-bottom:0px !important;
     }
+    .table_action_btn {
+        color:#fff;
+        display:inline-block;
+        padding:10px 5px;
+        width:31%;
+        text-align:center;
+        &:hover {
+            text-decoration:none;
+        }
+        i {
+            margin-right:5px;
+        }
+        span.btn_text {
+            @media(max-width:1700px) {
+                display:none;
+            }
+        }
+    }
     
 }

@@ -23,34 +23,7 @@ body {
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
-// LOADING BAR
-#loading-bar .bar {
-   background:#fff;
-   height:4px;
-   z-index:999999;
-   top:0;
-}
-#loading-bar-spinner {
-  position:fixed;
-  width:100%;
-  min-height:100%;
-  height:100%;
-  background:rgba(#333,0.8);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  padding-top:40%;
-  padding-left:50%;
-  z-index:10000;
 
-  .spinner-icon {
-    width:50px;
-    height:50px;
-    border-radius:50px;
-    border-top-color:  #fff;
-    border-left-color: #fff;
-  }  
-}
 
 
 ///////////////
@@ -646,6 +619,28 @@ ul.mids_subNav {
    }
 }
 
+.def_btn {
+  border:0;
+  color:#fff;
+  display:inline-block;
+  padding:12px 20px;
+  font-size:12px;
+  cursor:pointer;
+   &:hover {
+    color:#fff;
+    text-decoration:none;
+   }
+   i {
+    padding-right:4px;
+   }
+   span {
+    @media(max-width:1800px) {
+        display:none;
+     }
+   }
+  
+}
+
 .new_search_btn, .mod_search_btn{
   float:right;
   margin-right:5px;
@@ -663,6 +658,63 @@ ul.mids_subNav {
     &:hover {
         background:$peterriver;
    }
+}
+
+.margin-right{
+  margin-right: 5px;
+}
+.float-right{
+  float:right;
+}
+.peter_river_btn{
+  background:$peterriver;
+   &:hover {
+    background:$belizehole;
+   }  
+}
+.belize_hole_btn{
+  background:$belizehole;
+   &:hover {
+    background:$peterriver;
+   }  
+}
+.turquoise_btn{
+  background:$turquoise;
+   &:hover {
+    background:$greensea;
+   }
+}
+.alazarin_btn{
+  background:$alizarin;
+   &:hover {
+    background:$pomegranate; 
+  } 
+}
+.wet_asphalt_btn{
+    background:$wetasphalt;
+    &:hover {
+        background:$midnightblue;
+   }  
+}
+.emerald_btn{
+  background:$nephritis;
+   &:hover {
+    background:$emerald;
+   }  
+}
+.orange_btn{
+  background:$orange;
+   &:hover {
+    background:$sunflower;
+   }  
+}
+.disabled_btn{
+  background:$silver;
+}
+
+
+.full_width{
+  width:100%;
 }
 
 

@@ -1,6 +1,27 @@
-.login {
-    background:#181818;
+/* LOADING BAR */
+/*
+#loading-bar .bar {
+  -webkit-transition: width 350ms;
+  -moz-transition: width 350ms;
+  -o-transition: width 350ms;
+  transition: width 350ms;
+
+  background: #29d;
+  position: fixed;
+  z-index: 10002;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-bottom-right-radius: 1px;
+  border-top-right-radius: 1px;
 }
+*/
+.error {
+    color:$pomegranate;
+    display:none;
+}
+/* Login */
 .login_box {
     background:#eee;
     background:none;
@@ -8,26 +29,61 @@
     border-bottom:3px solid $blue;
     color:#fff;
     max-width:400px;
-    margin:12% auto 0 auto;
+    margin:0 auto;
     padding:15px 40px;
+}
+.forgot {
+    display:inline-block;
+    margin-top:15px;
+}
+.login,.reset, .reset_email, .reset_password,.reset_success {
+    background:$dark;
+    .login_panel {
+    margin-top:12%;
+    .main-icon {
+        color: rgba($midblue,0.6);
+        padding: 10px 18px;
+        background: #fff;
+        border-radius: 237px;
+        margin-bottom: 30px;
+        box-shadow: inset 1px 2px 2px 1px #555;
+    }
     input {
         border:0px;
         color:#333;
         border-radius:0px;
         background:#fff;
-        height:40px;
+        height:50px;
         position:relative;
         margin:5px 0;
+        &:focus {
+            box-shadow:none;
+            &:after {
+                background:#999;
+                content:'';
+                position:absolute;
+                width:10px;
+                height:10px;
+            }
+        }
+    }
+    .login-logo {
+        margin-bottom:30px;
     }
 }
-
-
-.forgot {
-    display:inline-block;
-    margin-top:15px;
+.login_error_msg {
+    height:15px;
+    color:$red;
 }
-
-
+.user_help {
+    font-size:16px;
+    line-height:1.6;
+    span {
+        a {
+            margin-left:10px;
+        }
+    }
+}
 section.copyright {
     margin-top:30px;
     text-align:center;
@@ -44,6 +100,19 @@ section.copyright {
     }
 }
 
+
+// SUBMIT BTN
+button[type="submit"] {
+    background:$blue;
+    border-radius:0px;
+    border:0px;
+    min-height:55px;
+    text-transform:uppercase;
+}
+
+
+
+} // END login
 
 //////////
 // RESET
