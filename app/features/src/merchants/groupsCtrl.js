@@ -42,6 +42,7 @@ app.controller('groupsCtrl', function($timeout,$filter,$rootScope,$scope,$http,$
 
 $scope.gotoMID = function(index,shownMerchants) {
 
+/*
   $timeout(function() {
     if($scope.isMidLoaded) {
 
@@ -52,14 +53,16 @@ $scope.gotoMID = function(index,shownMerchants) {
       // each row has a class of base and then the items $index
       
         $location.hash('base' + index);
-        $anchorScroll();
+        //$anchorScroll();
       
        
     } else {
       
     }
-  },600);
+  },1000);
+*/
 
+  shownMerchants[index].open = !shownMerchants[index].open;
 
 };
 
@@ -68,10 +71,6 @@ $scope.checkWindow = function(info) {
    console.log(info[0]);
    
 };
-
-
-
-
 
 $scope.CapValues = [
   {'value':10},
@@ -106,14 +105,6 @@ app.controller('createMerchantModalCtrl', function($scope,$modal,$log,$http) {
 
 
 var merchantCreateInstanceCtrl = function($scope,$modalInstance,$http,$timeout,$window,$state,baseUrl,$rootScope,Notify) {
-
-// CURRENCY SERVICE
-/*
- LoadCurrencies.then(function(data) {
-      $scope.currencies = data.data;
-      console.log($scope.currencies);
-  });
-*/
 
 $http.get( baseUrl + 'currencies').success(function(data) {
     $scope.currencies = data;
