@@ -100,8 +100,6 @@ app.controller('searchCtrl', function($scope,$http,$filter,baseUrl,$state) {
               var info = tran.ResponseDescription;
               var ui;
               
-              
-
               var check = result === 0;
               check ? ui = 'Success' : errorCheck();
 
@@ -143,6 +141,7 @@ app.controller('searchCtrl', function($scope,$http,$filter,baseUrl,$state) {
          return ui;
       };
 
+      console.log(data);
       // BIND DATA
       $scope.transData = data;
       $scope.dataLen = data.length;
