@@ -8,7 +8,7 @@ app.controller('loginCtrl', ['$scope', '$location', 'authService', function ($sc
         origin: $location.$$host
     };
 
-    $scope.loginUser = function() {
+    $scope.login = function() {
         authService.login($scope.loginData).then(function (response) {
             $location.path('/search');
         },
