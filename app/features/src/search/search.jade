@@ -1,8 +1,11 @@
+include ../modals/transaction_modal.html
+include ../modals/confirm_modal.html
+include ../modals/refund_modal.html
 .dash
     .row
-        h1 Reports Q
+        h1 Reports
     .form_wrapper
-        form.form.searcher.snap-shot.panel.panel-default
+        //form.form.searcher.snap-shot.panel.panel-default
             .panel-heading
                 h2.panel-title Transaction Snapshot:
             .panel-body
@@ -11,7 +14,7 @@
                         label Start Date:
                         .row
                             .col-md-8
-                                //include partials/calendar1-1.jade
+                                include partials/calendar1-1.jade
                             .col-md-2
                                 select.form-control(ng-options="item as item for item in Hours" ng-model="blah")
                                 
@@ -23,7 +26,7 @@
                         label End Date:
                         .row
                             .col-md-8
-                                //include partials/calendar1-2.jade
+                                include partials/calendar1-2.jade
                             .col-md-2
                                 select.form-control(ng-options="item as item for item in Hours" ng-model="blah2")
                                     
@@ -46,7 +49,6 @@
                             option(value="{{past90Days}}") Past 90 Days
                             option(value="{{past180Days}}") Past 180 Days
                             option(value="{{past360Days}}") Past 365 Days
-
                     .col-md-6.col-lg-4
                         label Gateway
                         select.form-control
@@ -59,7 +61,6 @@
                         button.generate_results(type="submit")
                             i.fa.fa-search
                             span Snapshot Search
-
         form.form.searcher.trans-form.panel.panel-default(name="transForm" ng-submit="transFormSubmit()")
             .panel-heading
                 h2.panel-title Transaction Search:
@@ -69,7 +70,7 @@
                         label Start Date:
                         .row
                             .col-md-8
-                                //include partials/calendar2-1.jade
+                                include partials/calendar2-1.jade
                             .col-md-2
                                 select.form-control(ng-options="item as item for item in Hours" ng-model="somemodelhere")
                                 
@@ -80,7 +81,7 @@
                         label End Date:
                         .row
                             .col-md-8
-                                //include partials/calendar2-2.jade
+                                include partials/calendar2-2.jade
                             .col-md-2
                                 select.form-control(ng-options="item as item for item in Hours" ng-model="fillitin")
                                 
@@ -164,3 +165,5 @@
                         button.generate_results(type="submit")
                             i.fa.fa-search
                             span Transaction Search
+
+include partials/transResults.jade

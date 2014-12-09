@@ -1,1 +1,299 @@
-<div class="dash"><div class="row"><h1>Reports Q</h1></div><div class="form_wrapper"><form class="form searcher snap-shot panel panel-default"><div class="panel-heading"><h2 class="panel-title">Transaction Snapshot:</h2></div><div class="panel-body"><div class="row"><div class="col-md-12 col-lg-3"><label>Start Date:</label><div class="row"><div class="col-md-8"><!--include partials/calendar1-1.jade--></div><div class="col-md-2"><select ng-options="item as item for item in Hours" ng-model="blah" class="form-control"></select></div><div class="col-md-2"><select ng-options="item as item for item in Mins" ng-model="blahblah" class="form-control"></select></div></div></div><div class="col-md-12 col-lg-3"><label>End Date:</label><div class="row"><div class="col-md-8"><!--include partials/calendar1-2.jade--></div><div class="col-md-2"><select ng-options="item as item for item in Hours" ng-model="blah2" class="form-control"></select></div><div class="col-md-2"><select ng-options="item as item for item in Mins" ng-model="blahblah2" class="form-control"></select></div></div></div><div class="col-md-6 col-lg-2"><label>Preset Date Range:</label><select ng-model="snap.fromDate" class="form-control"><option>Select An Item</option><option value="{{Yesterday}}">Yesterday</option><!--option Last Week--><!--option Last Month--><!--option Last Quarter--><!--option Last Year--><option value="{{past3Days}}">Past 3 Days</option><option value="{{past7Days}}">Past 7 Days</option><option value="{{past90Days}}">Past 90 Days</option><option value="{{past180Days}}">Past 180 Days</option><option value="{{past360Days}}">Past 365 Days</option></select></div><div class="col-md-6 col-lg-4"><label>Gateway</label><select class="form-control"><option>All Platforms Selected</option><option>platform 1</option><option>platform 2</option><option>platform 3</option></select></div></div><div class="row"><div class="col-md-12"><button type="submit" class="generate_results"><i class="fa fa-search"></i><span>Snapshot Search</span></button></div></div></div></form><form name="transForm" ng-submit="transFormSubmit()" class="form searcher trans-form panel panel-default"><div class="panel-heading"><h2 class="panel-title">Transaction Search:</h2></div><div class="panel-body"><div class="row"><div class="col-md-12 col-lg-3"><label>Start Date:</label><div class="row"><div class="col-md-8"><!--include partials/calendar2-1.jade--></div><div class="col-md-2"><select ng-options="item as item for item in Hours" ng-model="somemodelhere" class="form-control"></select></div><div class="col-md-2"><select ng-options="item as item for item in Mins" ng-model="miscModel" class="form-control"></select></div></div></div><div class="col-md-12 col-lg-3"><label>End Date:</label><div class="row"><div class="col-md-8"><!--include partials/calendar2-2.jade--></div><div class="col-md-2"><select ng-options="item as item for item in Hours" ng-model="fillitin" class="form-control"></select></div><div class="col-md-2"><select ng-options="item as item for item in Mins" ng-model="thisneedstobemodel" class="form-control"></select></div></div></div><div class="col-md-6 col-lg-2"><label>Preset Date Range:</label><select ng-model="transForm.fromDate" class="form-control"><option>Select An Item</option><option value="{{Yesterday}}">Yesterday</option><!--option Last Week--><!--option Last Month--><!--option Last Quarter--><!--option Last Year--><option value="{{past3Days}}">Past 3 Days</option><option value="{{past7Days}}">Past 7 Days</option><option value="{{past90Days}}">Past 90 Days</option><option value="{{past180Days}}">Past 180 Days</option><option value="{{past360Days}}">Past 365 Days</option></select></div><div class="col-md-6 col-lg-4"><label>Gateway</label><select ng-model="transForm.gateway" ng-options="obj.Id as obj.DisplayName for obj in gateways" class="form-control"></select></div></div><div class="row margin-top"><div class="col-md-3"><label>Merchant:</label><select ng-model="transForm.MID" ng-options="obj.Id as obj.DisplayName for obj in mids" class="form-control"></select></div><div class="col-md-3"><label>Status:</label><select ng-model="transForm.Status" class="form-control"><option>Any Status</option><option value="0">Success</option><option value="1">Declined</option><option value="2">Error</option></select></div><div class="col-md-3"><label>Transaction Type:</label><select ng-model="transForm.transType" class="form-control"><option>Any Transaction Type</option><option value="1">Charge</option><option value="2">Void</option><option value="3">Refund</option><option value="4">Authorize</option><option value="6">Capture</option></select></div><div class="col-md-3"><label>Action Type:</label><select class="form-control"><option>Any Action Type</option><option>option1</option></select></div></div><div class="row margin-top"><div class="col-md-3"><label>Transaction ID:</label><input type="text" placeholder="Transaction ID" ng-model="transForm.transId" class="form-control"/></div><div class="col-md-3"><label>Order ID:</label><input type="text" placeholder="Order ID" class="form-control"/></div><div class="col-md-3"><label>Last Name:</label><input type="text" placeholder="Last Name" ng-model="transForm.lname" class="form-control"/></div><div class="col-md-3"><label>First Name:</label><input type="text" placeholder="First Name" ng-model="transForm.fname" class="form-control"/></div></div><div class="row margin-top"><div class="col-md-3"><label>Email:</label><input type="text" placeholder="Email" ng-model="transForm.email" class="form-control"/></div><div class="col-md-3"><label>Phone Number:</label><input type="text" placeholder="Phone Number" ng-model="transForm.phone" class="form-control"/></div><div class="col-md-3"><label>Credit Card Last Four:</label><input type="text" placeholder="Credit Card Last Four" ng-model="transForm.CcLast4" class="form-control"/></div><div class="col-md-3"><label>Reference Number:</label><input type="text" placeholder="Reference Number" ng-model="transForm.refNumber" class="form-control"/></div></div><div class="row"><div class="col-md-12"><button type="submit" class="generate_results"><i class="fa fa-search"></i><span>Transaction Search</span></button></div></div></div></form></div></div>
+    <script type="text/ng-template" id="transModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title"><span class="subtle">Transaction Details:</span> {{trans.TransactionId}} <span class="subtle">Name:</span> {{trans.FirstName}} {{trans.LastName}}</h3>
+            <button type="button" class="close" ng-click="cancel()">x</button>
+        </div>
+        <div class="modal-body sale_info">
+           
+        <div ng-controller="TabsDemoCtrl">
+
+      <tabset justified="true">
+        <tab heading="Sale Information">
+     
+        <div class="row">
+        <div class="col-md-6">
+            <p><span>Transaction ID:</span>{{trans.TransactionId}}</p>
+            <p><span>Mid Display Name:</span>{{trans.MidDisplayName}}</p>
+            <p><span>Transaction Type:</span>{{trans.Type}}</p>
+            <p><span>Amount:</span>{{trans.Amount | currency}} {{trans.Currency}}</p>
+            <p><span>Response:</span>{{trans.ResponseDescription}}</p>
+            <p><span>Request Date:</span>{{trans.RequestDate}}</p>
+            <p><span>API User:</span>{{trans.ApiUser}}</p>
+            <p><span>Reference Number:</span>{{trans.ReferenceNumber}}</p>
+            <p><span>Authorization Code:</span>{{trans.AuthorizationCode}}</p>
+            <p>&nbsp;</p>
+        </div>
+        <div class="col-md-6">
+            <p><span>First Name:</span>{{trans.FirstName}}</p>
+            <p><span>Last Name:</span>{{trans.LastName}}</p>
+            <p><span>Email:</span>{{trans.Email}}</p>
+            <p><span>IP:</span>{{trans.Ip}}</p>
+            <p><span>Billing Address:</span>{{trans.BillingAddress}}</p>
+            <p><span>Billing Address:</span>{{trans.BillingAddress2}}</p>
+            <p><span>Billing City:</span>{{trans.BillingCity}}</p>
+            <p><span>Billing Zip:</span>{{trans.BillingZip}}</p>
+        </div>
+        </div>
+
+        <div class="row past_info">
+        <div class="col-lg-12">
+          <p><span>Original MID Transaction Number:</span>{{trans.OriginalMidTransactionNumber}}<span class="subtle" ng-show="trans.OriginalMidTransactionNumber == ''">No original MIDe</span></p>
+          <p><span>Previous Transaction Sent:</span>{{trans.PreviousTransactionNumberSent}}<span class="subtle" ng-show="trans.PreviousTransactionNumberSent == ''">No previous transaction</span> </p>
+          <p><span>Authorization Code Sent:</span>{{trans.AuthorizationCodeSent}}<span class="subtle" ng-show="trans.AuthorizationCodeSent == ''">No authorization code</span> </p>
+        </div>
+        </div>
+
+        </tab>
+        <!-- No chargeback as of this time on this modal
+        <tab heading="chargeback">
+
+        <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <span>Chargeback Status</span>
+            <select class="form-control">
+                <option>Disputed</option>
+                <option>Declined</option>
+            </select>
+
+            <span>Chargeback Status</span>
+            <select class="form-control">
+                <option>--Select--</option>
+                <option>Declined</option>
+            </select>
+
+            <span>Case #:</span>
+            <input type="text" class="form-control">
+
+            <span>ARN #</span>
+            <input type="text" class="form-control">
+
+        </div>
+        </div>
+
+
+        </tab>
+        
+        <tab heading="fraud info">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><span>Risk Score:</span>{{transaction.fraud_info.risk_score}}</p>
+                    <p><span>Free Mail:</span>{{transaction.fraud_info.free_mail}}</p>
+                    <p><span>Carder Email:</span>{{transaction.fraud_info.carder_email}}</p>
+                    <p><span>Explanation:</span></p>
+                    <p><span>Bin Match:</span>{{transaction.fraud_info.bin_match}}</p>
+                    <p><span>Bin Country:</span>{{transaction.fraud_info.bin_country}}</p>
+                    <p><span>Bin Name:</span>{{transaction.fraud_info.bin_name}}</p>
+                    <p><span>Phone:</span>{{transaction.fraud_info.bin_phone}}</p>
+                </div>
+            </div>
+        </tab>
+      </tabset>
+    </div> 
+    -->
+        </div>
+        <div class="modal-footer">
+             <a href="" class="cancel_btn" ng-click="cancel()">Exit</a>
+             <!--<a href="" ng-click="ok()">Save</a>-->
+        </div>
+
+    </script>    <!--MODAL WINDOW--> 
+    <script type="text/ng-template" id="voidModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title"><span class="subtle">Void Transaction:</span> {{trans.TransactionId}} <span class="subtle">Name:</span> {{trans.FirstName}} {{trans.LastName}}</h3>
+            <button type="button" class="close" ng-click="cancelVoid()">x</button>
+         </div>
+        <div class="modal-body">               
+         <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Transaction Id</th>
+                    <th>CRM MID</th>
+                    <th>Amount</th>
+                    <th>Currency</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+            <thead>
+            <tbody>
+                <tr>
+                    <td>{{trans.TransactionId}}</td>
+                    <td>{{trans.MidDisplayName}}</td>
+                    <td>{{trans.Amount | currency}}</td>
+                    <td>{{trans.Currency}}</td>
+                    <td>{{trans.FirstName}}</td>
+                    <td>{{trans.LastName}}</td>
+                </tr>
+            </tbody>
+         </table>
+
+        </div>
+
+        <div class="MID_feedback">
+            <p class="p-title">Are You Sure You Want To Void This Transaction?</p>
+            <h3>{{activeUser}}</h3>
+            <a href="" class="confirm_btn" ng-click="confirmVoid()">Confirm</a>
+        </div>
+
+        <div class="userCreateSuccess">
+            <p>Void Successful</p>
+        </div>
+
+        <div class="userError">
+            <p>Void Failed</p>
+        </div>
+
+         <div class="modal-footer">
+            <section class="voidBtns">
+            <!-- Response -->
+              <h3 class="text-center jumbotron voidFeedback">Action Status: <span>{{voidStatus}}</span></h3>              
+            <!--Buttons -->
+              <a href=""  class="action_btn" ng-click="processVoid(trans.TransactionId)">Void</a>
+              <a href="" class="cancel_btn" ng-click="cancelVoid()">Cancel</a>
+            </section>
+        </div>
+     </script>
+<!--MODAL WINDOW--> 
+    <script type="text/ng-template" id="refundModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title"><span class="subtle">Refund Transaction:</span> {{trans.TransactionId}} <span class="subtle">Name:</span> {{trans.FirstName}} {{trans.LastName}}</h3>
+            <button type="button" class="close" ng-click="cancelRefund()">x</button>
+         </div>
+        <div class="modal-body">
+          <table class="table-refund-input">
+            <tbody>
+                <tr>
+                    <td><h3 class="refund-panel">Refund Amount: </h3></td>
+                    <td><input class="form-control amount_input" id="refundAmount" type="text" placeholder="Enter Refund Amout" required></td>
+                    <td>{{trans.Currency}}</td>
+                </tr>
+            </tbody>
+         </table>
+
+
+          <table class="table table-responsive">
+            <h3>Transaction Details</h3>
+            <thead>
+                <tr>
+                    <th>Transaction Id</th>
+                    <th>CRM MID</th>
+                    <th>Amount</th>
+                    <th>Currency</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+            <thead>
+            <tbody>
+                <tr>
+                    <td>{{trans.TransactionId}}</td>
+                    <td>{{trans.MidDisplayName}}</td>
+                    <td>{{trans.Amount | currency}}</td>
+                    <td>{{trans.Currency}}</td>
+                    <td>{{trans.FirstName}}</td>
+                    <td>{{trans.LastName}}</td>
+                </tr>
+            </tbody>
+         </table>
+            
+        <div class="MID_feedback">
+            <p class="p-title">Are You Sure You Want To Refund?</p>
+            <h3>{{trans.Currency}} {{refundAmount | currency}}</h3>
+            <a href="" class="confirm_btn" ng-click="confirmRefund()">Confirm</a>
+        </div>
+
+        <div class="userCreateSuccess">
+          <p>Refund Successful</p>
+        </div>
+
+        <div class="userError">
+            <p>Refund Failed</p>
+        </div>
+                
+        </div>
+         <div class="modal-footer">
+            <section class="voidBtns">
+              <a href=""  class="action_btn" ng-click="processRefund(trans.Amount,trans.TransactionId)">Refund</a>
+              <a href="" class="cancel_btn" ng-click="cancelRefund()">Cancel</a>
+            </section>
+        </div>
+     </script><div class="dash"><div class="row"><h1>Reports</h1></div><div class="form_wrapper"><!--form.form.searcher.snap-shot.panel.panel-default.panel-heading
+    h2.panel-title Transaction Snapshot:
+.panel-body
+    .row
+        .col-md-12.col-lg-3
+            label Start Date:
+            .row
+                .col-md-8
+                    include partials/calendar1-1.jade
+                .col-md-2
+                    select.form-control(ng-options="item as item for item in Hours" ng-model="blah")
+                    
+                .col-md-2
+                    select.form-control(ng-options="item as item for item in Mins" ng-model="blahblah")
+                       
+                    
+        .col-md-12.col-lg-3
+            label End Date:
+            .row
+                .col-md-8
+                    include partials/calendar1-2.jade
+                .col-md-2
+                    select.form-control(ng-options="item as item for item in Hours" ng-model="blah2")
+                        
+                    
+                .col-md-2
+                    select.form-control(ng-options="item as item for item in Mins" ng-model="blahblah2")
+                       
+                    
+        .col-md-6.col-lg-2
+            label Preset Date Range:
+            select.form-control(ng-model="snap.fromDate")
+                option Select An Item
+                option(value="{{Yesterday}}") Yesterday
+                //option Last Week
+                //option Last Month
+                //option Last Quarter
+                //option Last Year
+                option(value="{{past3Days}}") Past 3 Days
+                option(value="{{past7Days}}") Past 7 Days
+                option(value="{{past90Days}}") Past 90 Days
+                option(value="{{past180Days}}") Past 180 Days
+                option(value="{{past360Days}}") Past 365 Days
+        .col-md-6.col-lg-4
+            label Gateway
+            select.form-control
+                option All Platforms Selected
+                option platform 1
+                option platform 2
+                option platform 3
+    .row
+        .col-md-12
+            button.generate_results(type="submit")
+                i.fa.fa-search
+                span Snapshot Search--><form name="transForm" ng-submit="transFormSubmit()" class="form searcher trans-form panel panel-default"><div class="panel-heading"><h2 class="panel-title">Transaction Search:</h2></div><div class="panel-body"><div class="row"><div class="col-md-12 col-lg-3"><label>Start Date:</label><div class="row"><div class="col-md-8"><div ng-controller="transfromDateCtrl" class="daterangePick"><input type="text" ng-model="transForm.fromDate" datepicker-popup="{{format}}" is-open="opened" min-date="&quot;minDate&quot;" max-date="&quot;maxDate&quot;" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="false" close-text="Close" placeholder="{{fromDate | date:&quot;MM/dd/yyyy&quot;}}" class="form-control"/><span class="input-group-btn"><button type="button" ng-click="open($event)" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button></span></div></div><div class="col-md-2"><select ng-options="item as item for item in Hours" ng-model="somemodelhere" class="form-control"></select></div><div class="col-md-2"><select ng-options="item as item for item in Mins" ng-model="miscModel" class="form-control"></select></div></div></div><div class="col-md-12 col-lg-3"><label>End Date:</label><div class="row"><div class="col-md-8"><div ng-controller="transendDateCtrl" class="daterangePick"><input type="text" ng-model="transForm.toDate" datepicker-popup="{{format}}" is-open="opened" min-date="&quot;minDate&quot;" max-date="&quot;maxDate&quot;" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="false" close-text="Close" placeholder="{{toDate | date:&quot;MM/dd/yyyy&quot;}}" class="form-control"/><span class="input-group-btn"><button type="button" ng-click="open($event)" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button></span></div></div><div class="col-md-2"><select ng-options="item as item for item in Hours" ng-model="fillitin" class="form-control"></select></div><div class="col-md-2"><select ng-options="item as item for item in Mins" ng-model="thisneedstobemodel" class="form-control"></select></div></div></div><div class="col-md-6 col-lg-2"><label>Preset Date Range:</label><select ng-model="transForm.fromDate" class="form-control"><option>Select An Item</option><option value="{{Yesterday}}">Yesterday</option><!--option Last Week--><!--option Last Month--><!--option Last Quarter--><!--option Last Year--><option value="{{past3Days}}">Past 3 Days</option><option value="{{past7Days}}">Past 7 Days</option><option value="{{past90Days}}">Past 90 Days</option><option value="{{past180Days}}">Past 180 Days</option><option value="{{past360Days}}">Past 365 Days</option></select></div><div class="col-md-6 col-lg-4"><label>Gateway</label><select ng-model="transForm.gateway" ng-options="obj.Id as obj.DisplayName for obj in gateways" class="form-control"></select></div></div><div class="row margin-top"><div class="col-md-3"><label>Merchant:</label><select ng-model="transForm.MID" ng-options="obj.Id as obj.DisplayName for obj in mids" class="form-control"></select></div><div class="col-md-3"><label>Status:</label><select ng-model="transForm.Status" class="form-control"><option>Any Status</option><option value="0">Success</option><option value="1">Declined</option><option value="2">Error</option></select></div><div class="col-md-3"><label>Transaction Type:</label><select ng-model="transForm.transType" class="form-control"><option>Any Transaction Type</option><option value="1">Charge</option><option value="2">Void</option><option value="3">Refund</option><option value="4">Authorize</option><option value="6">Capture</option></select></div><div class="col-md-3"><label>Action Type:</label><select class="form-control"><option>Any Action Type</option><option>option1</option></select></div></div><div class="row margin-top"><div class="col-md-3"><label>Transaction ID:</label><input type="text" placeholder="Transaction ID" ng-model="transForm.transId" class="form-control"/></div><div class="col-md-3"><label>Order ID:</label><input type="text" placeholder="Order ID" class="form-control"/></div><div class="col-md-3"><label>Last Name:</label><input type="text" placeholder="Last Name" ng-model="transForm.lname" class="form-control"/></div><div class="col-md-3"><label>First Name:</label><input type="text" placeholder="First Name" ng-model="transForm.fname" class="form-control"/></div></div><div class="row margin-top"><div class="col-md-3"><label>Email:</label><input type="text" placeholder="Email" ng-model="transForm.email" class="form-control"/></div><div class="col-md-3"><label>Phone Number:</label><input type="text" placeholder="Phone Number" ng-model="transForm.phone" class="form-control"/></div><div class="col-md-3"><label>Credit Card Last Four:</label><input type="text" placeholder="Credit Card Last Four" ng-model="transForm.CcLast4" class="form-control"/></div><div class="col-md-3"><label>Reference Number:</label><input type="text" placeholder="Reference Number" ng-model="transForm.refNumber" class="form-control"/></div></div><div class="row"><div class="col-md-12"><button type="submit" class="generate_results"><i class="fa fa-search"></i><span>Transaction Search</span></button></div></div></div></form></div></div><div class="transForm_feedback"><div class="panel panel-default transForm_results"><div class="panel-heading"><div class="row"><div class="col-md-6"><h2 class="panel-title">Transaction Results<span># of transations</span></h2></div><div class="col-md-6"><p>action buttons</p></div></div></div><div class="panel-body"><accordion><table st-table="shownData" st-safe-src="transData" class="table"><thead><tr><th colspan="13"><input st-search="" type="text" placeholder="Filter through all search results..." class="form-control"/></th></tr><tr><th>Trans ID</th><th>Type</th><th>Gateway</th><th>MID Name</th><th>Date</th><th>Amount</th><th>CC Type</th><th>#CC</th><th>Status</th><th>First Name</th><th>Last Name</th><th style="width:10%">Email</th><th style="width:20%">Actions</th></tr></thead><tbody ng-repeat="tran in shownData"><tr><td class="search-results-trans-id"><a ng-click="open(tran)" ng-controller="transModalCtrl" class="row_btn peter_river_btn full_width"><i class="fa fa-eye"></i><span>{{tran.TransactionId}}</span></a></td><td>{{tran.Type}}</td><td>{{tran.Gateway}}</td><td>{{tran.MidDisplayName}}</td><td>{{tran.RequestDate | date:'shortDate'}}</td><td>{{tran.Amount}}</td><td>{{tran.PaymentTypeName}}</td><td>{{tran.CcLastFour}}</td><td>Status Output</td><td>{{tran.FirstName}}</td><td>{{tran.LastName}}</td><td>{{tran.Email}}</td><td><a ng-click="open(tran)" ng-controller="refundModalCtrl"><!--i.fa.fa-money--><span>Refund</span></a><a ng-click="open(tran)" ng-controller="voidModalCtrl"><!--i.fa.fa-money--><span>Void</span></a><a ng-click="shownData[$index].open = !shownData[$index].open"><!--i.fa.fa-eye--><span>Trans</span></a></td><!--td.paymentTypesdiv(ng-if="trans.Type == 'Authorize' && trans.ResultCode == 0")
+    a.alazarin_btn.search_width.margin-right(tooltip="Void transaction: {{trans.TransactionId}}" tooltip-placement="top" ng-click="open(trans)" href="" ng-controller="voidModalCtrl") 
+      i.fa.fa-ban
+      span void
+    a.orange_btn.search_width.disabled(tooltip="Unable to refund with type as authorize" tooltip-placement="top")
+      i.fa.fa-money
+      span Refund
+
+div(ng-if="trans.Type == 'Capture' || trans.Type == 'Charge' && trans.ResultCode == 0")
+  a.alazarin_btn.search_width.margin-right(tooltip="Void transaction: {{trans.TransactionId}}" ng-click="open(trans)" href="" ng-controller="voidModalCtrl")
+    i.fa.fa-ban
+    span void
+  a.orange_btn.search_width(tooltip="Refund transaction: {{trans.TransactionId}}" ng-click="open(trans)" href="" ng-controller="refundModalCtrl")
+    i.fa.fa-money
+    span Refund
+
+div(ng-if="trans.Type == 'Void' || trans.Type == 'Refund' || trans.Type == 'Credit' || trans.ResultCode !== 0")
+  a.alazarin_btn.search_width.margin-right.disabled(tooltip="Unable to void with this processed type" tooltip-placement="top")
+    i.fa.fa-ban
+    span void
+  a.orange_btn.search_width.disabled(tooltip="Unable to refund with this processed type" tooltip-placement="top")
+    i.fa.fa-money
+    span Refund
+div
+  a.peter_river_btn
+    i.fa.fa-eye
+    span Trans
+--><td><tr><td colspan="13" class="pushToggle"><accordion-group heading="" is-open="tran.open"><h2> <i class="fa fa-exchange"></i><span>Related Transactions</span></h2><table class="table table-striped"><thead><tr><th>Transaction ID</th><th>API User</th><th>Amount</th><th>Type</th><th>Status</th><th>Gateway</th><th>Name</th><th>MID</th><th>Payment Type</th><th>Date</th></tr></thead><tbody>{{getNestedApiUser(tran)}}<tr ng-repeat="thing in nestedTrans"><td>{{thing.TransactionId}}</td><td>{{thing.ApiUser}}</td><td>{{thing.Amount}}</td><td>{{thing.Type}}</td><td>{{thing.ResultCode}}</td><td>{{thing.Gateway}}</td><td>{{thing.MidDisplayName}}</td><td>{{thing.Mid}}</td><td>{{thing.PaymentTypeName}}</td><td>{{thing.RequestDate  | date:'shortDate'}}</td></tr></tbody></table></accordion-group></td></tr></td></tr></tbody></table></accordion></div></div></div>
