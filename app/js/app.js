@@ -1,4 +1,4 @@
-var app = angular.module("myApp", ['ui.router','LocalStorageModule','angular-loading-bar','ui.bootstrap','smart-table','ngSanitize','mgo-angular-wizard']);
+var app = angular.module("myApp", ['ui.router','LocalStorageModule','angular-loading-bar','ui.bootstrap','smart-table','ngSanitize','mgo-angular-wizard','ngCsv']);
 
 
 app.constant('ngAuthSettings', {
@@ -46,6 +46,11 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider,$httpP
         url:'/virtual_terminal',
         templateUrl:'../features/dest/vterminal/vterminal.html',
         controller:'vterminalCtrl'
+    })
+    .state('app.usermanager', {
+        url:'/usermanager',
+        templateUrl:'../features/dest/usermanager/usermanager.html',
+        controller:'usermanagerCtrl'
     });
 
     // REMOVE HASH(#) FROM URL
