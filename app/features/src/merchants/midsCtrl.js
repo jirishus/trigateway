@@ -140,9 +140,7 @@ app.controller('midsCtrl', function($scope,$http,Notify) {
 
 });
 
-
-var editMidModalCtrl = function($scope,$modal,$log) {
-    
+app.controller('editMidModalCtrl', function($scope,$modal,$log) {
     $scope.openIt = function(mid) {
      var modalInstance = $modal.open({
         templateUrl:'midsModalContent2.html',
@@ -155,7 +153,7 @@ var editMidModalCtrl = function($scope,$modal,$log) {
         }
      });
     }
-} // END
+});
 
 var midEditInstanceCtrl = function($scope,$modalInstance,mid,$rootScope,$http,baseUrl) {
 
@@ -192,8 +190,7 @@ var midEditInstanceCtrl = function($scope,$modalInstance,mid,$rootScope,$http,ba
 ///////////////////////////
 //  MID REMOVE MODAL
 ///////////////////////////
-
-var removeMidModal = function($scope,$modal,$log) {
+app.controller('removeMidModal', function($scope,$modal,$log) {
     $scope.open = function(index,mid) {
         var modalInstance = $modal.open({
             templateUrl:'RemoveMidContent.html',
@@ -209,7 +206,7 @@ var removeMidModal = function($scope,$modal,$log) {
             }
         });
     }
-}
+});
 
 var removeMidCtrlInstance = function($scope,$modalInstance,$log,index,mid,$http,baseUrl,Notify,$timeout) {
     $scope.mid = mid;
@@ -246,8 +243,7 @@ var removeMidCtrlInstance = function($scope,$modalInstance,$log,index,mid,$http,
 ///////////////////////////
 //  MID DISABLE MODAL
 ///////////////////////////
-var DeleteMidCtrl = function($scope,$modal,$log) {
-
+app.controller('DeleteMidCtrl', function($scope,$modal,$log) {
     $scope.openMID = function(index,mid) {
         var modalInstance = $modal.open({
             templateUrl:'DeleteMidContent.html',
@@ -263,7 +259,7 @@ var DeleteMidCtrl = function($scope,$modal,$log) {
             }
         });
     }
-}
+});
 
 var DeleteMidCtrlInstance = function($scope,$modalInstance,$log,mid,$http,Notify,index,$timeout,baseUrl) {
 
@@ -310,8 +306,7 @@ var DeleteMidCtrlInstance = function($scope,$modalInstance,$log,mid,$http,Notify
 ///////////////////////////
 //  MID ENABLE MODAL
 ///////////////////////////
-var EnableMidCtrl = function($scope,$modal,$log) {
-
+app.controller('EnableMidCtrl', function($scope,$modal,$log) {
     $scope.open = function(index,mid) {
         var modalInstance = $modal.open({
             templateUrl:'EnableMidContent.html',
@@ -328,8 +323,7 @@ var EnableMidCtrl = function($scope,$modal,$log) {
             
         });
     }
-
-}
+});
 
 var EnableMidCtrlInstance = function($scope,$modalInstance,$log,mid,$http,Notify,index,$timeout,baseUrl) {
 

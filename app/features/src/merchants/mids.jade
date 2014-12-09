@@ -1,3 +1,9 @@
+include ../modals/midsEditModal2.html
+include ../modals/midCreateModal.jade
+include ../modals/deleteMidModal.jade
+include ../modals/enableMidModal.jade
+include ../modals/removeMidModal.jade
+
 .row
     h1 Merchant Accounts - Manage MIDs
 .panel.panel-default
@@ -108,7 +114,7 @@
                             div.floater
                                 ul(ng-repeat="roll in rollGroups track by $index")
                                     li {{roll}}
-                    //td 
+                    td 
                         a.row_btn.edit_mid_btn(ng-click="openIt(mid)" ng-controller="editMidModalCtrl")
                             i.fa.fa-edit
                             span Edit
@@ -123,5 +129,5 @@
                             span Delete
             tfoot
                 tr
-                    td.text-center(colspan="5")
-                        div(st-pagination="" st-items-by-page="10")
+                    td.text-center(colspan="10")
+                        div(st-pagination="" st-items-by-page="20")
