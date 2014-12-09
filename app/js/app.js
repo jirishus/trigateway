@@ -17,6 +17,26 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider,$httpP
         templateUrl:'../features/dest/login/login.html',
         controller:'loginCtrl'
     })
+    .state('reset', {
+        url:'/reset', 
+        templateUrl:'../features/dest/resetpass/reset.html',
+        controller:'resetCtrl'
+    })
+    .state('reset_email', {
+        url:'/reset_email',
+        templateUrl:'../features/dest/resetpass/resetEmail.html',
+        controller:'resetEmailCtrl'
+    })
+    .state('reset_password', {
+        url:'/reset_password',
+        templateUrl:'../features/dest/resetpass/resetPassword.html',
+        controller:'resetPasswordCtrl'
+    })
+    .state('reset_success', {
+        url:'/reset_success',
+        templateUrl:'../features/dest/resetpass/resetSuccess.html',
+        controller:'resetSuccessCtrl'
+    })
     .state('app', {
         abstract:true,
         url:'',
