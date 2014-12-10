@@ -143,7 +143,7 @@ table.table.table-striped.ng-table-responsive.primary_search_table(st-table="sho
                             a.row_btn.orange_btn.search_width.disabled(tooltip="Unable to refund with this processed type" tooltip-placement="top")
                               i.fa.fa-money
                               span Refund
-                //tfoot
-                  tr
-                    td(colspan="5" class="text-center")
-                      div(st-pagination="" st-items-by-page="5")
+                  tfoot
+                      tr
+                          td.text-center(colspan="13")
+                              div(st-items-by-page='20', st-pagination='')

@@ -1,4 +1,4 @@
-app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$state,$moment) {
+app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$state,$moment,Notify) {
 
   /////////////////
   // SINGLE SEARCH 
@@ -12,12 +12,158 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
 
   // Handle Form Submit
   $scope.submit = function() {
-    console.log('submission');
-  };
+
+    //set todays date if dates not defined
+    if ($scope.search_form.fromDate == undefined){$scope.search_form.fromDate = new Date();}
+    if ($scope.search_form.toDate == undefined){$scope.search_form.toDate = new Date();}
+
+    // DATE FORMATTING
+    var datefilter = $filter('date'),
+        formatDate = datefilter($scope.search_form.fromDate,'MM/dd/yy'),
+        formatDate2 = datefilter($scope.search_form.toDate, 'MM/dd/yy');
+    
+    // Create Query Object for POST request to Endpoint
+    var formQuery =  {
+            "FirstName": $scope.search_form.fname,
+            "LastName": $scope.search_form.lname,
+            "email": $scope.search_form.email,
+            "TransactionId":$scope.search_form.transID,
+            "ReferenceNumber":$scope.search_form.refNum,
+            "CcLast4":$scope.search_form.cc_digits,
+            "Phone":$scope.search_form.phoneNum,
+            "FromDate":formatDate,
+            "ToDate":formatDate2,
+            "Status":$scope.search_form.statusmenu,
+            "TransactionType":$scope.search_form.transmenu,
+            "MidGroupId":$scope.search_form.midmenu
+    };
+
+    console.log(formQuery);
+
+    // SEND POST REQUEST
+    
+    $http({
+      method:'POST',
+      url:baseUrl + 'transactions',
+      data:formQuery
+    }).success(function(data,status) {
+
+      // check if returned data is an object or array
+          var check = angular.isArray(data);
+          if(check) {
+            // results returned [array]
+            console.log(data);
+
+            $scope.data = data;
+            $scope.shownData = $scope.data;
+            $scope.resultAmount = data.length;
+
+            Notify.getMsg('RefundProcess', function(event,data) {
+              $scope.shownData.push(data.ApiResponse);
+              //console.log(data.ApiResponse);
+
+            });
+
+            // CREATE STATUS TOOLTIP
+            $scope.returnStatus = function(trans) {
+
+              var result = trans.ResultCode;
+              var info = trans.ResponseDescription;
+              var ui;
+              
+              
+
+              var check = result === 0;
+              check ? ui = 'Success' : errorCheck();
+
+              function errorCheck() {
+
+                var regex = /declined/i;
+                var tester = regex.test(info);
+
+                if(tester) {
+                  ui = 'Declined';
+                } else {
+                  ui = 'Failed';
+                }
+
+              }
+
+              return ui;
+              
+            }
+
+          } else {
+            // no results {object}
+            $scope.resultAmount = 0;
+            
+          } // END else
+
+          //$scope.data = data;
+
+          // RESULTS FEEDBACK
+          //$scope.resultAmount   = data.length;
+          //$scope.searchlname    = $scope.search_form.lname;
+          //$scope.searchfname    = $scope.search_form.fname;
+          //$scope.searchEmail    = $scope.search_form.email;
+          //$scope.searchTransID  = $scope.search_form.transID;
+          
+
+          $('table thead').show(500);
+          $('form.searcher').slideUp(300);
+          $('.search_feedback').slideDown(500);
+          $('.container_search_parameters').show();
+
+          // CSV EXPORT
+          $scope.transactionCSV = data;
+
+    });
+
+
+
+
+  }; // END SUBMIT
+
+
+  //////////////////////////
+  // MODIFY SEARCH TOGGLE
+  //////////////////////////
+  $scope.modform = function() {
+    $('form.searcher').slideToggle(300);
+    $('.container_search_parameters').slideToggle(300);
+  }
+  
+  //////////////////////////
+  // ADVANCED SEARCH TOGGLE
+  //////////////////////////
+  $scope.toggleSearch = function() {
+  
+  var txt = $('.advanced_fields').is(':visible') ? 'Advanced Search' : 'Hide Advanced Search';
+             $('.advanced_search').text(txt);
+             $('.advanced_fields').slideToggle();
+  }
+
+  //////////////////////////
+  // SELECT MENUS
+  //////////////////////////
+  $scope.statusItems = [
+      {value:"0", text:"Success"},
+      {value:"1", text:"Declined"},
+      {value:"2", text:"Error"}
+  ];
+
+  $scope.transItems = [
+      {value:"1", text:"Charge"},
+      {value:"2", text:"Void"},
+      {value:"3", text:"Refund"},
+      {value:"4", text:"Authorize"},
+      {value:"6", text:"Capture"}
+  ];
 
 
 //-----------------------------------------//
 //-----------------------------------------//
+
   /////////////////
   // GROUP SEARCH 
   /////////////////
@@ -138,7 +284,7 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
       $scope.FROMDATE = formatDate;
     }
     
-    // CHECK TO TIME
+    // CHECK TOTIME
     if($scope.toHours && $scope.fromMins) {
       $scope.TODATE = $scope.toDATE;
     } else {

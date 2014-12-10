@@ -201,7 +201,7 @@ include ../modals/refund_modal.html
                             //select.form-control(ng-options="obj.value as obj.name for obj in dateRanges" ng-model="transForm.dateOptions" ng-change="updateOptions(transForm)")
                     h2.search_header Merchant Details:    
                     .row
-                        .col-md-6.col-lg-4
+                        .col-md-4
                             label Gateway
                             select.form-control(ng-model="transForm.gateway" ng-options="obj.Id as obj.DisplayName for obj in gateways")
                         .col-md-4
