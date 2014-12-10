@@ -215,7 +215,7 @@
               <a href="" class="cancel_btn" ng-click="cancelRefund()">Cancel</a>
             </section>
         </div>
-     </script><div class="dash"><div class="row searchType"><h2 class="lead">Search Type<select ng-model="searchType" class="form-control"><option>Select A Search Mode</option><option>Single</option><option>Groups</option></select></h2></div><div ng-show="searchType == 'Single'" class="row"><h1>Search</h1><form role="form" ng-submit="search_form.$valid &amp;&amp; submit()" name="search_form" novalidate="novalidate" class="form searcher panel panel-default"><div class="panel-heading"><h2 class="panel-title">Search Options</h2></div><div class="panel-body"><h2 class="date_title search_header">Date Selection:</h2><div class="row"><div class="col-sm-8"><div class="col-md-6 nopad">
+     </script><div class="dash"><h1>Transaction Search</h1><div class="panel panel-default panel-options"><div class="panel-heading"><div class="row"><div class="col-md-8"><h2 class="panel-title">Search Result Format:</h2></div><div class="col-md-4"><div class="row"><div class="col-md-6"><a href="" ng-model="searchType" ng-click="singleFormat()" class="search_format single_format"> <i class="fa fa-file-o"></i><span>Single Format:</span></a></div><div class="col-md-6"><a href="" ng-model="searchType" ng-click="groupFormat()" class="search_format group_format"> <i class="fa fa-files-o"></i><span>Group Format:</span></a></div></div></div></div></div><div class="panel-body"><!--p(ng-show="searchType == 'single'") form 1--><!--p(ng-show="searchType == 'group'") form 2--><div ng-show="searchType == 'single'" class="row"><form ng-submit="submit()" name="search_form" novalidate="novalidate" class="form searcher"><h2 class="date_title search_header">Date Selection:</h2><div class="row"><div class="col-sm-8"><div class="col-md-6 nopad">
 <div ng-controller="firstdateCtrl" class="daterangePick">
        
     <input type="text" ng-model="search_form.fromDate" class="form-control" datepicker-popup="{{format}}" is-open="opened" min-date="'minDate'" max-date="'maxDate'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="false" close-text="Close" placeholder="From Date   {{fromDate | date:'MM/dd/yy'}}" />
@@ -237,7 +237,20 @@
 
 
 
-</div><div class="col-sm-4"></div></div><h2 class="search_header">User Details:</h2><div class="row"><div class="col-md-4"><div class="form-group"><label>Last Name</label><input type="text" placeholder="ex Nelson" ng-model="search_form.lname" id="lname" value="name"/></div></div><div class="col-md-4"><label>First Name</label><input type="text" placeholder="ex John" ng-model="search_form.fname"/></div><div class="col-md-4"><label>Email</label><input type="text" placeholder="ex johndoe@email.com" ng-model="search_form.email"/></div></div><div class="row"><div class="col-md-4"><div class="form-group"><label>Transaction ID</label><input type="text" placeholder="ex 5489629" ng-model="search_form.transID"/></div></div><div class="col-md-4"><div class="form-group"><label>Credit Card's Last 4 Digits</label><input type="text" placeholder="ex 1680" ng-model="search_form.cc_digits"/></div></div><div class="col-md-4"><label>Phone Number</label><input type="text" placeholder="ex 619-445-9654" ng-model="search_form.phoneNum"/></div></div><div class="advanced_fields"><h2 class="tagged">Advanced Search</h2><div class="row"><div class="col-md-3"><div class="form-group"><label>Status</label><select ng-model="search_form.statusmenu" ng-options="obj.value as obj.text for obj in statusItems" class="form-control"><option value="">Select An Item</option></select></div></div><div class="col-md-3"><label>Mid Group</label><select ng-model="search_form.midmenu" ng-options="obj.Id as obj.Name for obj in groupsBulk" class="form-control"><option value="">Select An Item</option></select></div><div class="col-md-3"><label>Transaction Type</label><select ng-model="search_form.transmenu" ng-options="obj.value as obj.text for obj in transItems" class="form-control"><option value="">Select An Item</option></select></div><div class="col-md-3"><label>Reference Number</label><input type="text" placeholder="ex 898989898" ng-model="search_form.refNum"/></div></div></div><div class="row text-center"><button type="submit" id="submit" class="generate_results"><i class="fa fa-search"> </i><span> Search</span></button><a href="" ng-click="toggleSearch()" class="advanced_search">Advanced Search</a></div></div></form><div class="search_feedback"><div class="panel panel-default table_search_results"><div class="panel-heading search_table_heading"><div class="row"><div class="col-md-6"><h2 class="panel-title">Search Results <span>{{resultAmount}}</span></h2></div><div class="col-md-6"><a href="" ng-csv="transactionCSV" filename="transactions.csv" ng-show="transactionCSV.length" class="def_btn wet_asphalt_btn float-right"> <i class="fa fa-file-excel-o"></i><span>Export Excel</span></a><a tooltip="Begin a new search" tooltip-placement="top" href="" ng-click="new_search()" class="def_btn belize_hole_btn float-right margin-right"> <i class="fa fa-search"> </i><span>New Search</span></a><a tooltip="Modify existing search" tooltip-placement="top" href="" ng-click="modform()" class="def_btn peter_river_btn float-right margin-right"><i class="fa fa-search-plus"></i><span>Modify Search</span></a></div></div></div><div class="panel-body"><h3 ng-if="resultAmount == 0" class="noResults">{{'We apologize but there are no results found for your search'}}</h3><table st-table="shownData" st-safe-src="data" ng-if="resultAmount != 0" class="table table-striped ng-table-responsive primary_search_table"><thead><tr class="search-header-blank"><th colspan="13"><input st-search="" type="search" placeholder="Filter through all search results..." class="form-control"/></th></tr><tr><th st-sort="TransactionId" width="6%" class="st-header">Trans ID</th><th st-sort="Type" width="5%" class="st-header">Type</th><th st-sort="Gateway" width="5%" class="st-header">Gateway</th><th st-sort="MidDisplayName" width="10%" class="st-header">MID Name</th><th st-sort="RequestDate" width="5%" class="st-header">Date</th><th st-sort="Amount" width="5%" class="st-header">Amount</th><th st-sort="PaymentTypeName" width="6%" class="st-header">CC Type</th><th st-sort="CcLastFour" width="5%" class="st-header">#CC</th><th st-sort="ResponseDescription" width="5%" class="st-header">Status</th><th st-sort="FirstName" width="7%" class="st-header">First Name</th><th st-sort="LastName" width="7%" class="st-header">Last Name</th><th st-sort="Email" width="10%" class="st-header">Email</th><th width="14%" class="st-header-nosort">Actions</th></tr></thead><tbody><tr><td><span tooltip="Filter by entering an ID" tooltip-placement="top"> <input st-search="'TransactionId'" type="search" placeholder="Filter ID" class="form-control"/></span></td><td><span tooltip="Filter by entering a transaction type" tooltip-placement="top"> <input st-search="'Type'" type="search" placeholder="Filter Type" class="form-control"/></span><!--select.form-control(ng-model="typeFilter")option(value="") All
+</div><div class="col-sm-4"></div></div><h2 class="search_header">User Details:</h2><div class="row"><div class="col-md-4"><div class="form-group"><label>Last Name</label><input type="text" placeholder="ex Nelson" ng-model="search_form.lname" id="lname" value="name"/></div></div><div class="col-md-4"><label>First Name</label><input type="text" placeholder="ex John" ng-model="search_form.fname"/></div><div class="col-md-4"><label>Email</label><input type="text" placeholder="ex johndoe@email.com" ng-model="search_form.email"/></div></div><div class="row"><div class="col-md-4"><div class="form-group"><label>Transaction ID</label><input type="text" placeholder="ex 5489629" ng-model="search_form.transID"/></div></div><div class="col-md-4"><div class="form-group"><label>Credit Card's Last 4 Digits</label><input type="text" placeholder="ex 1680" ng-model="search_form.cc_digits"/></div></div><div class="col-md-4"><label>Phone Number</label><input type="text" placeholder="ex 619-445-9654" ng-model="search_form.phoneNum"/></div></div><div class="advanced_fields"><h2 class="tagged">Advanced Search</h2><div class="row"><div class="col-md-3"><div class="form-group"><label>Status</label><select ng-model="search_form.statusmenu" ng-options="obj.value as obj.text for obj in statusItems" class="form-control"><option value="">Select An Item</option></select></div></div><div class="col-md-3"><label>Mid Group</label><select ng-model="search_form.midmenu" ng-options="obj.Id as obj.Name for obj in groupsBulk" class="form-control"><option value="">Select An Item</option></select></div><div class="col-md-3"><label>Transaction Type</label><select ng-model="search_form.transmenu" ng-options="obj.value as obj.text for obj in transItems" class="form-control"><option value="">Select An Item</option></select></div><div class="col-md-3"><label>Reference Number</label><input type="text" placeholder="ex 898989898" ng-model="search_form.refNum"/></div></div></div><div class="row text-center"><button type="submit" id="submit" class="generate_results"><i class="fa fa-search"> </i><span> Search</span></button><a href="" ng-click="toggleSearch()" class="advanced_search">Advanced Search</a></div></form></div><div ng-show="searchType == 'group'" class="row"><form name="transForm" ng-submit="transFormSubmit()" class="form searcher trans-form"><h2 class="date_title search_header">Date Selection:</h2><div class="row"><div class="col-md-12 col-lg-4"><label>Start Date:</label><div class="row"><div class="col-md-8"><div ng-controller="transfromDateCtrl" class="daterangePick"><input type="text" ng-model="transForm.fromDate" datepicker-popup="{{format}}" is-open="opened" min-date="&quot;minDate&quot;" max-date="&quot;maxDate&quot;" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="false" close-text="Close" placeholder="{{fromDate | date:&quot;MM/dd/yyyy&quot;}}" class="form-control"/><span class="input-group-btn"><button type="button" ng-click="open($event)" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button></span></div></div><div class="col-md-2"><select ng-options="item as item for item in Hours" ng-model="fromHours" class="form-control"></select></div><div class="col-md-2"><select ng-options="item as item for item in Mins" ng-model="fromMins" class="form-control"></select></div></div></div><div class="col-md-12 col-lg-4"><label>End Date:</label><div class="row"><div class="col-md-8"><div ng-controller="transendDateCtrl" class="daterangePick"><input type="text" ng-model="transForm.toDate" datepicker-popup="{{format}}" is-open="opened" min-date="&quot;minDate&quot;" max-date="&quot;maxDate&quot;" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="false" close-text="Close" placeholder="{{toDate | date:&quot;MM/dd/yyyy&quot;}}" class="form-control"/><span class="input-group-btn"><button type="button" ng-click="open($event)" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button></span></div></div><div class="col-md-2"><select ng-options="item as item for item in Hours" ng-model="toHours" class="form-control"></select></div><div class="col-md-2"><select ng-options="item as item for item in Mins" ng-model="toMins" class="form-control"></select></div></div></div><div class="col-md-6 col-lg-4"><label>Preset Date Range:</label><select ng-model="transForm.fromDate" class="form-control"><option>Select An Item</option><option value="{{Yesterday}}">Yesterday</option><!--option Last Week--><!--option Last Month--><!--option Last Quarter--><!--option Last Year--><option value="{{past3Days}}" class="pastSet">Past 3 Days</option><option value="{{past7Days}}" class="pastSet">Past 7 Days</option><option value="{{past90Days}}" class="pastSet">Past 90 Days</option><option value="{{past180Days}}" class="pastSet">Past 180 Days</option><option value="{{past360Days}}" class="pastSet">Past 365 Days</option></select><!--select.form-control(ng-options="obj.value as obj.name for obj in dateRanges" ng-model="transForm.dateOptions" ng-change="updateOptions(transForm)")--></div></div><h2 class="search_header">Merchant Details:    </h2><div class="row"><div class="col-md-4"><label>Gateway</label><select ng-model="transForm.gateway" ng-options="obj.Id as obj.DisplayName for obj in gateways" class="form-control"></select></div><div class="col-md-4"><label>Merchant:</label><select ng-model="transForm.MID" ng-options="obj.Id as obj.DisplayName for obj in mids" class="form-control"></select></div><div class="col-md-4"><label>Status:</label><select ng-model="transForm.Status" class="form-control"><option>Any Status</option><option value="0">Success</option><option value="1">Declined</option><option value="2">Error</option></select></div><!--.col-md-4label Transaction Type:
+select.form-control(ng-model="transForm.transType")
+    option Any Transaction Type
+    option(value=1) Charge
+    option(value=2) Void
+    option(value=3) Refund
+    option(value=4) Authorize
+    option(value=6) Capture--><!--.col-md-3label Action Type:
+select.form-control
+    option Any Action Type
+    option option1--></div><h2 class="search_header">User Details:</h2><div class="row"><div class="col-md-4"><label>Transaction ID:</label><input type="text" placeholder="Transaction ID" ng-model="transForm.transId" class="form-control"/></div><div class="col-md-4"><label>Transaction Type:</label><select ng-model="transForm.transType" class="form-control"><option>Any Transaction Type</option><option value="1">Charge</option><option value="2">Void</option><option value="3">Refund</option><option value="4">Authorize</option><option value="6">Capture</option></select></div><div class="col-md-4"><label>Reference Number:</label><input type="text" placeholder="Reference Number" ng-model="transForm.refNumber" class="form-control"/></div><!--.col-md-3label Order ID:
+input.form-control(type="text" placeholder="Order ID")--><!--.col-md-3label Last Name:
+input.form-control(type="text" placeholder="Last Name" ng-model="transForm.lname")--><!--.col-md-3label First Name:
+input.form-control(type="text" placeholder="First Name" ng-model="transForm.fname")--></div><div class="row"><div class="col-md-4"><label>Last Name:</label><input type="text" placeholder="Last Name" ng-model="transForm.lname" class="form-control"/></div><div class="col-md-4"><label>First Name:</label><input type="text" placeholder="First Name" ng-model="transForm.fname" class="form-control"/></div><div class="col-md-4"><label>Email:</label><input type="text" placeholder="Email" ng-model="transForm.email" class="form-control"/></div></div><div class="row"><div class="col-md-4"><label>Phone Number:</label><input type="text" placeholder="Phone Number" ng-model="transForm.phone" class="form-control"/></div><div class="col-md-4"><label>Credit Card Last Four:</label><input type="text" placeholder="Credit Card Last Four" ng-model="transForm.CcLast4" class="form-control"/></div></div><div class="row"><div class="col-md-12"><button type="submit" class="generate_results"><i class="fa fa-search"></i><span>Transaction Search:</span></button></div></div></form></div></div><div class="search_feedback"><div class="panel panel-default table_search_results"><div class="panel-heading search_table_heading"><div class="row"><div class="col-md-6"><h2 class="panel-title">Search Results <span>{{resultAmount}}</span></h2></div><div class="col-md-6"><a href="" ng-csv="transactionCSV" filename="transactions.csv" ng-show="transactionCSV.length" class="def_btn wet_asphalt_btn float-right"> <i class="fa fa-file-excel-o"></i><span>Export Excel</span></a><a tooltip="Begin a new search" tooltip-placement="top" href="" ng-click="new_search()" class="def_btn belize_hole_btn float-right margin-right"> <i class="fa fa-search"> </i><span>New Search</span></a><a tooltip="Modify existing search" tooltip-placement="top" href="" ng-click="modform()" class="def_btn peter_river_btn float-right margin-right"><i class="fa fa-search-plus"></i><span>Modify Search</span></a></div></div></div><div class="panel-body"><h3 ng-if="resultAmount == 0" class="noResults">{{'We apologize but there are no results found for your search'}}</h3><table st-table="shownData" st-safe-src="data" ng-if="resultAmount != 0" class="table table-striped ng-table-responsive primary_search_table"><thead><tr class="search-header-blank"><th colspan="13"><input st-search="" type="search" placeholder="Filter through all search results..." class="form-control"/></th></tr><tr><th st-sort="TransactionId" width="6%" class="st-header">Trans ID</th><th st-sort="Type" width="5%" class="st-header">Type</th><th st-sort="Gateway" width="5%" class="st-header">Gateway</th><th st-sort="MidDisplayName" width="10%" class="st-header">MID Name</th><th st-sort="RequestDate" width="5%" class="st-header">Date</th><th st-sort="Amount" width="5%" class="st-header">Amount</th><th st-sort="PaymentTypeName" width="6%" class="st-header">CC Type</th><th st-sort="CcLastFour" width="5%" class="st-header">#CC</th><th st-sort="ResponseDescription" width="5%" class="st-header">Status</th><th st-sort="FirstName" width="7%" class="st-header">First Name</th><th st-sort="LastName" width="7%" class="st-header">Last Name</th><th st-sort="Email" width="10%" class="st-header">Email</th><th width="14%" class="st-header-nosort">Actions</th></tr></thead><tbody><tr><td><span tooltip="Filter by entering an ID" tooltip-placement="top"> <input st-search="'TransactionId'" type="search" placeholder="Filter ID" class="form-control"/></span></td><td><span tooltip="Filter by entering a transaction type" tooltip-placement="top"> <input st-search="'Type'" type="search" placeholder="Filter Type" class="form-control"/></span><!--select.form-control(ng-model="typeFilter")option(value="") All
 option(value="Authorize") Authorize
 option(value="Charge") Charge
 option(value="Refund") Refund
@@ -252,74 +265,189 @@ option(value="AMEX") AMEX
 option(value="Success") Success
 option(value="Declined") Declined
 option(value="Failed") Failed
---></td><td><span tooltip="Filter by entering a first name" tooltip-placement="top"> <input st-search="'FirstName'" type="search" placeholder="Filter First Name" class="form-control"/></span></td><td><span tooltip="Filter by entering a last name" tooltip-placement="top"> <input st-search="'LastName'" type="search" placeholder="Filter Last Name" class="form-control"/></span></td><td><span tooltip="Filter by entering an email" tooltip-placement="top"> <input st-search="'Email'" type="search" placeholder="Filter Email" class="form-control"/></span></td><td><span></span></td></tr><tr ng-repeat="trans in shownData"><td class="search-results-trans-id"><a tooltip="See transaction details for {{trans.TransactionId}}" tooltip-placement="top" href="" ng-click="open(trans)" ng-controller="transModalCtrl" class="row_btn peter_river_btn full_width"><i class="fa fa-eye"></i><span>{{trans.TransactionId}}</span></a></td><td>{{trans.Type}}</td><td>{{trans.Gateway}}</td><td>{{trans.MidDisplayName}}</td><td>{{trans.RequestDate | date:'shortDate' }}</td><td ng-class="(trans.Amount &gt; 0) ? 'cash_pos' : 'cash_neg' ">{{trans.Amount | currency }}</td><td class="paymentTypes"><div ng-if="trans.PaymentTypeName == 'Discover'"><i class="fa fa-cc-discover fa-2x"> </i><span></span></div><div ng-if="trans.PaymentTypeName == 'Mastercard'"><i class="fa fa-cc-mastercard fa-2x"> </i><span></span></div><div ng-if="trans.PaymentTypeName == 'Visa'"><i class="fa fa-cc-visa fa-2x"> </i><span></span></div><div ng-if="trans.PaymentTypeName == 'AMEX'"><i class="fa fa-cc-amex fa-2x"> </i><span></span></div></td><td>{{trans.CcFirstSix}}-{{trans.CcLastFour}}</td><!--td {{trans.ResponseDescription}}--><td><a href="" class="groupAnchor"><span ng-class="(trans.ResultCode === 0) ? 'success' : 'failed' ">{{returnStatus(trans)}}</span><i class="fa fa-info-circle"></i><div class="floater"><ul><li>{{trans.ResponseDescription}}</li></ul></div></a></td><td>{{trans.FirstName}}</td><td>{{trans.LastName}}</td><td>{{trans.Email}}</td><td class="paymentTypes"><div ng-if="trans.Type == 'Authorize' &amp;&amp; trans.ResultCode == 0"><a tooltip="Void transaction: {{trans.TransactionId}}" tooltip-placement="top" ng-click="open(trans)" href="" ng-controller="voidModalCtrl" class="row_btn alazarin_btn search_width margin-right"> <i class="fa fa-ban"></i><span>void</span></a><a tooltip="Unable to refund with type as authorize" tooltip-placement="top" class="row_btn orange_btn search_width disabled"><i class="fa fa-money"></i><span>Refund</span></a></div><div ng-if="trans.Type == 'Capture' || trans.Type == 'Charge' &amp;&amp; trans.ResultCode == 0"><a tooltip="Void transaction: {{trans.TransactionId}}" ng-click="open(trans)" href="" ng-controller="voidModalCtrl" class="row_btn alazarin_btn search_width margin-right"><i class="fa fa-ban"></i><span>void</span></a><a tooltip="Refund transaction: {{trans.TransactionId}}" ng-click="open(trans)" href="" ng-controller="refundModalCtrl" class="row_btn orange_btn search_width"><i class="fa fa-money"></i><span>Refund</span></a></div><div ng-if="trans.Type == 'Void' || trans.Type == 'Refund' || trans.Type == 'Credit' || trans.ResultCode !== 0"><a tooltip="Unable to void with this processed type" tooltip-placement="top" class="row_btn alazarin_btn search_width margin-right disabled"><i class="fa fa-ban"></i><span>void</span></a><a tooltip="Unable to refund with this processed type" tooltip-placement="top" class="row_btn orange_btn search_width disabled"><i class="fa fa-money"></i><span>Refund</span></a></div></td></tr></tbody><tfoot><tr><td colspan="13" class="text-center"><div st-items-by-page="20" st-pagination=""></div></td></tr></tfoot></table></div></div></div></div><div ng-show="searchType == 'Groups'" class="row"><h1>Reports</h1><div class="form_wrapper"><!--form.form.searcher.snap-shot.panel.panel-default.panel-heading
-    h2.panel-title Transaction Snapshot:
-.panel-body
-    .row
-        .col-md-12.col-lg-3
-            label Start Date:
+--></td><td><span tooltip="Filter by entering a first name" tooltip-placement="top"> <input st-search="'FirstName'" type="search" placeholder="Filter First Name" class="form-control"/></span></td><td><span tooltip="Filter by entering a last name" tooltip-placement="top"> <input st-search="'LastName'" type="search" placeholder="Filter Last Name" class="form-control"/></span></td><td><span tooltip="Filter by entering an email" tooltip-placement="top"> <input st-search="'Email'" type="search" placeholder="Filter Email" class="form-control"/></span></td><td><span></span></td></tr><tr ng-repeat="trans in shownData"><td class="search-results-trans-id"><a tooltip="See transaction details for {{trans.TransactionId}}" tooltip-placement="top" href="" ng-click="open(trans)" ng-controller="transModalCtrl" class="row_btn peter_river_btn full_width"><i class="fa fa-eye"></i><span>{{trans.TransactionId}}</span></a></td><td>{{trans.Type}}</td><td>{{trans.Gateway}}</td><td>{{trans.MidDisplayName}}</td><td>{{trans.RequestDate | date:'shortDate' }}</td><td ng-class="(trans.Amount &gt; 0) ? 'cash_pos' : 'cash_neg' ">{{trans.Amount | currency }}</td><td class="paymentTypes"><div ng-if="trans.PaymentTypeName == 'Discover'"><i class="fa fa-cc-discover fa-2x"> </i><span></span></div><div ng-if="trans.PaymentTypeName == 'Mastercard'"><i class="fa fa-cc-mastercard fa-2x"> </i><span></span></div><div ng-if="trans.PaymentTypeName == 'Visa'"><i class="fa fa-cc-visa fa-2x"> </i><span></span></div><div ng-if="trans.PaymentTypeName == 'AMEX'"><i class="fa fa-cc-amex fa-2x"> </i><span></span></div></td><td>{{trans.CcFirstSix}}-{{trans.CcLastFour}}</td><!--td {{trans.ResponseDescription}}--><td><a href="" class="groupAnchor"><span ng-class="(trans.ResultCode === 0) ? 'success' : 'failed' ">{{returnStatus(trans)}}</span><i class="fa fa-info-circle"></i><div class="floater"><ul><li>{{trans.ResponseDescription}}</li></ul></div></a></td><td>{{trans.FirstName}}</td><td>{{trans.LastName}}</td><td>{{trans.Email}}</td><td class="paymentTypes"><div ng-if="trans.Type == 'Authorize' &amp;&amp; trans.ResultCode == 0"><a tooltip="Void transaction: {{trans.TransactionId}}" tooltip-placement="top" ng-click="open(trans)" href="" ng-controller="voidModalCtrl" class="row_btn alazarin_btn search_width margin-right"> <i class="fa fa-ban"></i><span>void</span></a><a tooltip="Unable to refund with type as authorize" tooltip-placement="top" class="row_btn orange_btn search_width disabled"><i class="fa fa-money"></i><span>Refund</span></a></div><div ng-if="trans.Type == 'Capture' || trans.Type == 'Charge' &amp;&amp; trans.ResultCode == 0"><a tooltip="Void transaction: {{trans.TransactionId}}" ng-click="open(trans)" href="" ng-controller="voidModalCtrl" class="row_btn alazarin_btn search_width margin-right"><i class="fa fa-ban"></i><span>void</span></a><a tooltip="Refund transaction: {{trans.TransactionId}}" ng-click="open(trans)" href="" ng-controller="refundModalCtrl" class="row_btn orange_btn search_width"><i class="fa fa-money"></i><span>Refund</span></a></div><div ng-if="trans.Type == 'Void' || trans.Type == 'Refund' || trans.Type == 'Credit' || trans.ResultCode !== 0"><a tooltip="Unable to void with this processed type" tooltip-placement="top" class="row_btn alazarin_btn search_width margin-right disabled"><i class="fa fa-ban"></i><span>void</span></a><a tooltip="Unable to refund with this processed type" tooltip-placement="top" class="row_btn orange_btn search_width disabled"><i class="fa fa-money"></i><span>Refund</span></a></div></td></tr></tbody><tfoot><tr><td colspan="13" class="text-center"><div st-items-by-page="20" st-pagination=""></div></td></tr></tfoot></table></div></div></div></div><!--.row(ng-show="searchType == 'group'")h1 Reports
+.form_wrapper
+    //form.form.searcher.snap-shot.panel.panel-default
+        .panel-heading
+            h2.panel-title Transaction Snapshot:
+        .panel-body
             .row
-                .col-md-8
-                    include partials/calendar1-1.jade
-                .col-md-2
-                    select.form-control(ng-options="item as item for item in Hours" ng-model="blah")
-                    
-                .col-md-2
-                    select.form-control(ng-options="item as item for item in Mins" ng-model="blahblah")
-                       
-                    
-        .col-md-12.col-lg-3
-            label End Date:
+                .col-md-12.col-lg-3
+                    label Start Date:
+                    .row
+                        .col-md-8
+                            include partials/calendar1-1.jade
+                        .col-md-2
+                            select.form-control(ng-options="item as item for item in Hours" ng-model="blah")
+                            
+                        .col-md-2
+                            select.form-control(ng-options="item as item for item in Mins" ng-model="blahblah")
+                               
+                            
+                .col-md-12.col-lg-3
+                    label End Date:
+                    .row
+                        .col-md-8
+                            include partials/calendar1-2.jade
+                        .col-md-2
+                            select.form-control(ng-options="item as item for item in Hours" ng-model="blah2")
+                                
+                            
+                        .col-md-2
+                            select.form-control(ng-options="item as item for item in Mins" ng-model="blahblah2")
+                               
+                            
+                .col-md-6.col-lg-2
+                    label Preset Date Range:
+                    select.form-control(ng-model="snap.fromDate")
+                        option Select An Item
+                        option(value="{{Yesterday}}") Yesterday
+                        //option Last Week
+                        //option Last Month
+                        //option Last Quarter
+                        //option Last Year
+                        option(value="{{past3Days}}") Past 3 Days
+                        option(value="{{past7Days}}") Past 7 Days
+                        option(value="{{past90Days}}") Past 90 Days
+                        option(value="{{past180Days}}") Past 180 Days
+                        option(value="{{past360Days}}") Past 365 Days
+                .col-md-6.col-lg-4
+                    label Gateway
+                    select.form-control
+                        option All Platforms Selected
+                        option platform 1
+                        option platform 2
+                        option platform 3
             .row
-                .col-md-8
-                    include partials/calendar1-2.jade
-                .col-md-2
-                    select.form-control(ng-options="item as item for item in Hours" ng-model="blah2")
+                .col-md-12
+                    button.generate_results(type="submit")
+                        i.fa.fa-search
+                        span Snapshot Search
+    form.form.searcher.trans-form(name="transForm" ng-submit="transFormSubmit()")
+        .panel-heading
+            h2.panel-title Transaction Search:
+        .panel-body
+            h2.date_title.search_header Date Selection:
+            .row
+                .col-md-12.col-lg-4
+                    label Start Date:
+                    .row
+                        .col-md-8
+                            include partials/calendar2-1.jade
+                        .col-md-2
+                            select.form-control(ng-options="item as item for item in Hours" ng-model="fromHours")
+                            
+                        .col-md-2
+                            select.form-control(ng-options="item as item for item in Mins" ng-model="fromMins")
+                            
+                .col-md-12.col-lg-4
+                    label End Date:
+                    .row
+                        .col-md-8
+                            include partials/calendar2-2.jade
+                        .col-md-2
+                            select.form-control(ng-options="item as item for item in Hours" ng-model="toHours")
+                            
+                        .col-md-2
+                            select.form-control(ng-options="item as item for item in Mins" ng-model="toMins")
+                            
+                .col-md-6.col-lg-4
+                    label Preset Date Range:
+                    select.form-control(ng-model="transForm.fromDate")
+                        option Select An Item
+                        option(value="{{Yesterday}}") Yesterday
+                        //option Last Week
+                        //option Last Month
+                        //option Last Quarter
+                        //option Last Year
+                        option.pastSet(value="{{past3Days}}") Past 3 Days
+                        option.pastSet(value="{{past7Days}}") Past 7 Days
+                        option.pastSet(value="{{past90Days}}") Past 90 Days
+                        option.pastSet(value="{{past180Days}}") Past 180 Days
+                        option.pastSet(value="{{past360Days}}") Past 365 Days
+
+
+                    //select.form-control(ng-options="obj.value as obj.name for obj in dateRanges" ng-model="transForm.dateOptions" ng-change="updateOptions(transForm)")
+            h2.search_header Merchant Details:    
+            .row
+                .col-md-4
+                    label Gateway
+                    select.form-control(ng-model="transForm.gateway" ng-options="obj.Id as obj.DisplayName for obj in gateways")
+                .col-md-4
+                    label Merchant:
+                    select.form-control(ng-model="transForm.MID" ng-options="obj.Id as obj.DisplayName for obj in mids")
                         
-                    
-                .col-md-2
-                    select.form-control(ng-options="item as item for item in Mins" ng-model="blahblah2")
-                       
-                    
-        .col-md-6.col-lg-2
-            label Preset Date Range:
-            select.form-control(ng-model="snap.fromDate")
-                option Select An Item
-                option(value="{{Yesterday}}") Yesterday
-                //option Last Week
-                //option Last Month
-                //option Last Quarter
-                //option Last Year
-                option(value="{{past3Days}}") Past 3 Days
-                option(value="{{past7Days}}") Past 7 Days
-                option(value="{{past90Days}}") Past 90 Days
-                option(value="{{past180Days}}") Past 180 Days
-                option(value="{{past360Days}}") Past 365 Days
-        .col-md-6.col-lg-4
-            label Gateway
-            select.form-control
-                option All Platforms Selected
-                option platform 1
-                option platform 2
-                option platform 3
-    .row
-        .col-md-12
-            button.generate_results(type="submit")
-                i.fa.fa-search
-                span Snapshot Search--><form name="transForm" ng-submit="transFormSubmit()" class="form searcher trans-form panel panel-default"><div class="panel-heading"><h2 class="panel-title">Transaction Search:</h2></div><div class="panel-body"><h2 class="date_title search_header">Date Selection:</h2><div class="row"><div class="col-md-12 col-lg-4"><label>Start Date:</label><div class="row"><div class="col-md-8"><div ng-controller="transfromDateCtrl" class="daterangePick"><input type="text" ng-model="transForm.fromDate" datepicker-popup="{{format}}" is-open="opened" min-date="&quot;minDate&quot;" max-date="&quot;maxDate&quot;" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="false" close-text="Close" placeholder="{{fromDate | date:&quot;MM/dd/yyyy&quot;}}" class="form-control"/><span class="input-group-btn"><button type="button" ng-click="open($event)" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button></span></div></div><div class="col-md-2"><select ng-options="item as item for item in Hours" ng-model="fromHours" class="form-control"></select></div><div class="col-md-2"><select ng-options="item as item for item in Mins" ng-model="fromMins" class="form-control"></select></div></div></div><div class="col-md-12 col-lg-4"><label>End Date:</label><div class="row"><div class="col-md-8"><div ng-controller="transendDateCtrl" class="daterangePick"><input type="text" ng-model="transForm.toDate" datepicker-popup="{{format}}" is-open="opened" min-date="&quot;minDate&quot;" max-date="&quot;maxDate&quot;" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="false" close-text="Close" placeholder="{{toDate | date:&quot;MM/dd/yyyy&quot;}}" class="form-control"/><span class="input-group-btn"><button type="button" ng-click="open($event)" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button></span></div></div><div class="col-md-2"><select ng-options="item as item for item in Hours" ng-model="toHours" class="form-control"></select></div><div class="col-md-2"><select ng-options="item as item for item in Mins" ng-model="toMins" class="form-control"></select></div></div></div><div class="col-md-6 col-lg-4"><label>Preset Date Range:</label><select ng-model="transForm.fromDate" class="form-control"><option>Select An Item</option><option value="{{Yesterday}}">Yesterday</option><!--option Last Week--><!--option Last Month--><!--option Last Quarter--><!--option Last Year--><option value="{{past3Days}}" class="pastSet">Past 3 Days</option><option value="{{past7Days}}" class="pastSet">Past 7 Days</option><option value="{{past90Days}}" class="pastSet">Past 90 Days</option><option value="{{past180Days}}" class="pastSet">Past 180 Days</option><option value="{{past360Days}}" class="pastSet">Past 365 Days</option></select><!--select.form-control(ng-options="obj.value as obj.name for obj in dateRanges" ng-model="transForm.dateOptions" ng-change="updateOptions(transForm)")--></div></div><h2 class="search_header">Merchant Details:    </h2><div class="row"><div class="col-md-4"><label>Gateway</label><select ng-model="transForm.gateway" ng-options="obj.Id as obj.DisplayName for obj in gateways" class="form-control"></select></div><div class="col-md-4"><label>Merchant:</label><select ng-model="transForm.MID" ng-options="obj.Id as obj.DisplayName for obj in mids" class="form-control"></select></div><div class="col-md-4"><label>Status:</label><select ng-model="transForm.Status" class="form-control"><option>Any Status</option><option value="0">Success</option><option value="1">Declined</option><option value="2">Error</option></select></div><!--.col-md-4label Transaction Type:
-select.form-control(ng-model="transForm.transType")
-    option Any Transaction Type
-    option(value=1) Charge
-    option(value=2) Void
-    option(value=3) Refund
-    option(value=4) Authorize
-    option(value=6) Capture--><!--.col-md-3label Action Type:
-select.form-control
-    option Any Action Type
-    option option1--></div><h2 class="search_header">User Details:</h2><div class="row"><div class="col-md-4"><label>Transaction ID:</label><input type="text" placeholder="Transaction ID" ng-model="transForm.transId" class="form-control"/></div><div class="col-md-4"><label>Transaction Type:</label><select ng-model="transForm.transType" class="form-control"><option>Any Transaction Type</option><option value="1">Charge</option><option value="2">Void</option><option value="3">Refund</option><option value="4">Authorize</option><option value="6">Capture</option></select></div><div class="col-md-4"><label>Reference Number:</label><input type="text" placeholder="Reference Number" ng-model="transForm.refNumber" class="form-control"/></div><!--.col-md-3label Order ID:
-input.form-control(type="text" placeholder="Order ID")--><!--.col-md-3label Last Name:
-input.form-control(type="text" placeholder="Last Name" ng-model="transForm.lname")--><!--.col-md-3label First Name:
-input.form-control(type="text" placeholder="First Name" ng-model="transForm.fname")--></div><div class="row"><div class="col-md-4"><label>Last Name:</label><input type="text" placeholder="Last Name" ng-model="transForm.lname" class="form-control"/></div><div class="col-md-4"><label>First Name:</label><input type="text" placeholder="First Name" ng-model="transForm.fname" class="form-control"/></div><div class="col-md-4"><label>Email:</label><input type="text" placeholder="Email" ng-model="transForm.email" class="form-control"/></div></div><div class="row"><div class="col-md-4"><label>Phone Number:</label><input type="text" placeholder="Phone Number" ng-model="transForm.phone" class="form-control"/></div><div class="col-md-4"><label>Credit Card Last Four:</label><input type="text" placeholder="Credit Card Last Four" ng-model="transForm.CcLast4" class="form-control"/></div></div><div class="row"><div class="col-md-12"><button type="submit" class="generate_results"><i class="fa fa-search"></i><span>Transaction Search:</span></button></div></div></div></form></div></div></div><div class="transForm_feedback"><div class="panel panel-default transForm_results"><div class="panel-heading"><div class="row"><div class="col-md-6"><h2 class="panel-title"><span>{{dataLen}} results</span></h2></div><div class="col-md-6"><a ng-csv="transactionCSV" filename="transactions.csv" ng-show="transactionCSV.length" class="def_btn wet_asphalt_btn float-right margin-right"><i class="fa fa-file"></i><span>Export Excel</span></a><a ng-click="new_search()" class="def_btn belize_hole_btn float-right margin-right"><i class="fa fa-search"></i><span>New Search</span></a><a ng-click="modify_search()" class="def_btn peter_river_btn float-right margin-right"><i class="fa fa-search-plus"></i><span>Modify Search</span></a></div></div></div><div class="panel-body"><accordion close-others="oneAtATime"><table st-table="shownData" st-safe-src="transData" class="table"><thead><tr><th colspan="13"><input st-search="" type="text" placeholder="Filter through all search results..." class="form-control"/></th></tr><tr><th>Trans ID</th><th>Type</th><th>Gateway</th><th>MID Name</th><th>Date</th><th>Amount</th><th>CC Type</th><th>#CC</th><th>Status</th><th>First Name</th><th>Last Name</th><th style="width:10%">Email</th><th style="width:20%">Actions</th></tr></thead><tbody ng-repeat="tran in shownData"><tr><td class="search-results-trans-id"><a ng-click="open(tran)" ng-controller="transModalCtrl" class="row_btn peter_river_btn full_width"><i class="fa fa-eye"></i><span>{{tran.TransactionId}}</span></a></td><td>{{tran.Type}}</td><td>{{tran.Gateway}}</td><td>{{tran.MidDisplayName}}</td><td>{{tran.RequestDate | date:'shortDate'}}</td><td>{{tran.Amount}}</td><td>{{tran.PaymentTypeName}}</td><td>{{tran.CcLastFour}}</td><!--td {{returnStatus(tran)}}--><td><a href="" class="groupAnchor"><span ng-class="(tran.ResultCode === 0) ? 'success' : 'failed' ">{{returnStatus(tran)}}</span><i class="fa fa-info-circle"></i><div class="floater"><ul><li>{{tran.ResponseDescription}}</li></ul></div></a></td><td>{{tran.FirstName}}</td><td>{{tran.LastName}}</td><td>{{tran.Email}}</td><td><a ng-click="open(tran)" ng-controller="refundModalCtrl" class="table_action_btn peter_river_btn margin-right"><i class="fa fa-money"></i><span class="btn_text">Refund</span></a><a ng-click="open(tran)" ng-controller="voidModalCtrl" class="table_action_btn alazarin_btn margin-right"><i class="fa fa-ban"></i><span class="btn_text">Void</span></a><a ng-click="doToggle(tran)" ng-if="tran.RelatedTransactions &amp;&amp; tran.RelatedTransactions.length &gt; 0" class="table_action_btn peter_river_btn"><i class="fa fa-eye"></i><span class="btn_text">Trans</span><span>{{tran.RelatedTransactions.length}}</span></a></td><!--td.paymentTypesdiv(ng-if="trans.Type == 'Authorize' && trans.ResultCode == 0")
+                .col-md-4
+                    label Status:
+                    select.form-control(ng-model="transForm.Status")
+                        option Any Status
+                        option(value=0) Success
+                        option(value=1) Declined
+                        option(value=2) Error
+                //.col-md-4
+                    label Transaction Type:
+                    select.form-control(ng-model="transForm.transType")
+                        option Any Transaction Type
+                        option(value=1) Charge
+                        option(value=2) Void
+                        option(value=3) Refund
+                        option(value=4) Authorize
+                        option(value=6) Capture
+                //.col-md-3
+                    label Action Type:
+                    select.form-control
+                        option Any Action Type
+                        option option1
+            h2.search_header User Details:
+            .row
+                .col-md-4
+                    label Transaction ID:
+                    input.form-control(type="text" placeholder="Transaction ID" ng-model="transForm.transId")
+                .col-md-4
+                    label Transaction Type:
+                    select.form-control(ng-model="transForm.transType")
+                        option Any Transaction Type
+                        option(value=1) Charge
+                        option(value=2) Void
+                        option(value=3) Refund
+                        option(value=4) Authorize
+                        option(value=6) Capture
+                .col-md-4
+                    label Reference Number:
+                    input.form-control(type="text" placeholder="Reference Number" ng-model="transForm.refNumber")
+                //.col-md-3
+                    label Order ID:
+                    input.form-control(type="text" placeholder="Order ID")
+                //.col-md-3
+                    label Last Name:
+                    input.form-control(type="text" placeholder="Last Name" ng-model="transForm.lname")
+                //.col-md-3
+                    label First Name:
+                    input.form-control(type="text" placeholder="First Name" ng-model="transForm.fname")
+            .row
+                .col-md-4
+                    label Last Name:
+                    input.form-control(type="text" placeholder="Last Name" ng-model="transForm.lname")
+                .col-md-4
+                    label First Name:
+                    input.form-control(type="text" placeholder="First Name" ng-model="transForm.fname")
+                .col-md-4
+                    label Email:
+                    input.form-control(type="text" placeholder="Email" ng-model="transForm.email")
+            .row
+                .col-md-4
+                    label Phone Number:
+                    input.form-control(type="text" placeholder="Phone Number" ng-model="transForm.phone")
+                .col-md-4
+                    label Credit Card Last Four:
+                    input.form-control(type="text" placeholder="Credit Card Last Four" ng-model="transForm.CcLast4")
+
+            .row
+                .col-md-12
+                    button.generate_results(type="submit")
+                        i.fa.fa-search
+                        span Transaction Search:
+--></div><div class="transForm_feedback"><div class="panel panel-default transForm_results"><div class="panel-heading"><div class="row"><div class="col-md-6"><h2 class="panel-title"><span>{{dataLen}} results</span></h2></div><div class="col-md-6"><a ng-csv="transactionCSV" filename="transactions.csv" ng-show="transactionCSV.length" class="def_btn wet_asphalt_btn float-right margin-right"><i class="fa fa-file"></i><span>Export Excel</span></a><a ng-click="new_search()" class="def_btn belize_hole_btn float-right margin-right"><i class="fa fa-search"></i><span>New Search</span></a><a ng-click="modify_search()" class="def_btn peter_river_btn float-right margin-right"><i class="fa fa-search-plus"></i><span>Modify Search</span></a></div></div></div><div class="panel-body"><accordion close-others="oneAtATime"><table st-table="shownData" st-safe-src="transData" class="table"><thead><tr><th colspan="13"><input st-search="" type="text" placeholder="Filter through all search results..." class="form-control"/></th></tr><tr><th>Trans ID</th><th>Type</th><th>Gateway</th><th>MID Name</th><th>Date</th><th>Amount</th><th>CC Type</th><th>#CC</th><th>Status</th><th>First Name</th><th>Last Name</th><th style="width:10%">Email</th><th style="width:20%">Actions</th></tr></thead><tbody ng-repeat="tran in shownData"><tr><td class="search-results-trans-id"><a ng-click="open(tran)" ng-controller="transModalCtrl" class="row_btn peter_river_btn full_width"><i class="fa fa-eye"></i><span>{{tran.TransactionId}}</span></a></td><td>{{tran.Type}}</td><td>{{tran.Gateway}}</td><td>{{tran.MidDisplayName}}</td><td>{{tran.RequestDate | date:'shortDate'}}</td><td>{{tran.Amount}}</td><td>{{tran.PaymentTypeName}}</td><td>{{tran.CcLastFour}}</td><!--td {{returnStatus(tran)}}--><td><a href="" class="groupAnchor"><span ng-class="(tran.ResultCode === 0) ? 'success' : 'failed' ">{{returnStatus(tran)}}</span><i class="fa fa-info-circle"></i><div class="floater"><ul><li>{{tran.ResponseDescription}}</li></ul></div></a></td><td>{{tran.FirstName}}</td><td>{{tran.LastName}}</td><td>{{tran.Email}}</td><td><a ng-click="open(tran)" ng-controller="refundModalCtrl" class="table_action_btn peter_river_btn margin-right"><i class="fa fa-money"></i><span class="btn_text">Refund</span></a><a ng-click="open(tran)" ng-controller="voidModalCtrl" class="table_action_btn alazarin_btn margin-right"><i class="fa fa-ban"></i><span class="btn_text">Void</span></a><a ng-click="doToggle(tran)" ng-if="tran.RelatedTransactions &amp;&amp; tran.RelatedTransactions.length &gt; 0" class="table_action_btn peter_river_btn"><i class="fa fa-eye"></i><span class="btn_text">Trans</span><span>{{tran.RelatedTransactions.length}}</span></a></td><!--td.paymentTypesdiv(ng-if="trans.Type == 'Authorize' && trans.ResultCode == 0")
     a.table_action_btn.alazarin_btn.margin-right(tooltip="Void transaction: {{trans.TransactionId}}" tooltip-placement="top" ng-click="open(trans)" href="" ng-controller="voidModalCtrl") 
       i.fa.fa-ban
       span void

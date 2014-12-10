@@ -4,8 +4,33 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
   // SINGLE SEARCH 
   /////////////////
 
-  // Set Default for Search Type DropDown
-  $scope.searchType = 'Single';
+
+  //////////////////////////////
+  // TOGGLE SINGLE FORMAT SEARCH
+  //////////////////////////////
+  $scope.singleFormat = function() {
+    $scope.searchType = 'single';
+    // SWAP ACTIVE CLASS
+    $('.single_format').addClass('activeFormat');
+    $('.group_format').removeClass('activeFormat');
+  };
+
+  //////////////////////////////
+  // TOGGLE SINGLE FORMAT SEARCH
+  //////////////////////////////
+  $scope.groupFormat = function() {
+    $scope.searchType = 'group';
+    // SWAP ACTIVE CLASS
+    $('.group_format').addClass('activeFormat');
+    $('.single_format').removeClass('activeFormat');
+  };
+
+
+  // Set Default for Search Type 
+  $scope.searchType = 'single';
+  $('.single_format').addClass('activeFormat');
+  
+
 
   // cache form for queryObj and to clear input fields
   $scope.search_form = {};
@@ -108,6 +133,7 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
           //$scope.searchEmail    = $scope.search_form.email;
           //$scope.searchTransID  = $scope.search_form.transID;
           
+          $('.panel-options').slideUp(300);
 
           $('table thead').show(500);
           $('form.searcher').slideUp(300);
@@ -129,10 +155,11 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
   // MODIFY SEARCH TOGGLE
   //////////////////////////
   $scope.modform = function() {
-    $('form.searcher').slideToggle(300);
+    //$('form.searcher').slideToggle(300);
+    $('.panel-options').slideToggle(300);
     $('.container_search_parameters').slideToggle(300);
   }
-  
+
   //////////////////////////
   // ADVANCED SEARCH TOGGLE
   //////////////////////////
@@ -382,9 +409,10 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
 
       // OPEN ACCORDION BY DEFAULT
 
-
-      $('.form_wrapper').slideUp(300);
+      $('.panel-options').slideUp(300);
       $('.transForm_feedback').slideDown(300);
+
+
 
     });
     
@@ -405,7 +433,8 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
   // MODIFY SEARCH
   /////////////////
   $scope.modify_search = function() {
-    $('.form_wrapper').slideToggle(300);
+    //$('.form_wrapper').slideToggle(300);
+    $('.panel-options').slideToggle(300);
   };
 
   
