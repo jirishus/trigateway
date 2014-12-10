@@ -30,11 +30,11 @@ script(type="text/ng-template" id="merchantEditContent.html")
 						td
 							input.form-control(ng-model="merchant.BalancingType")
 						td
-							input.form-control(ng-model="merchant.Currency.Name")
+							select.form-control(ng-options="item.Id as item.Name for item in currencies" ng-model="merchant.Currency")
 	.userCreateSuccess
 		p Merchant Account Updated
 	.modal-footer
-		a.modal_edit(ng-show="merchantEditForm.$dirty") Save
+		a.modal_edit(ng-show="merchantEditForm.$dirty" type="submit" ng-click="updateMerchant(merchant)") Save
 		a.cancel_btn(ng-click="cancel()") Exit
 
 

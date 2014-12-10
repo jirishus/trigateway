@@ -71,6 +71,11 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider,$httpP
         url:'/usermanager',
         templateUrl:'../features/dest/usermanager/usermanager.html',
         controller:'usermanagerCtrl'
+    })
+    .state('app.mock', {
+        url:'/mock',
+        templateUrl:'../features/dest/mock/mock.html',
+        controller:'mockCtrl'
     });
 
     // REMOVE HASH(#) FROM URL

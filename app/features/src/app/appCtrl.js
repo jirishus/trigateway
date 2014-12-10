@@ -156,6 +156,7 @@ $http.get(baseUrl + 'users').success(function(data) {
   $scope.Users = data;
   $scope.shownUsers = $scope.Users;
 
+  console.log(data);
   
   // CSV Export
   $scope.usersCSV = data;

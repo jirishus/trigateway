@@ -365,14 +365,15 @@ app.controller('editMerchantModalCtrl', function($scope,$http,$modal,$log) {
 
 // MODAL INSTANCE
 var merchantEditInstanceCtrl = function($scope,$modalInstance,$http,$timeout,merchant,baseUrl) {
-  $scope.merchant = merchant;
+  $scope.original = merchant;
+  $scope.merchant = angular.copy(merchant);
 
 // CURRENCY SERVICE
 $http.get( baseUrl + 'currencies').success(function(data) {
     $scope.currencies = data;
 });
 
-
+/*
   $scope.CapValues = [
   {'value':10},
   {'value':20},
@@ -384,16 +385,45 @@ $http.get( baseUrl + 'currencies').success(function(data) {
   {'value':80},
   {'value':90},
 ];
+
 $scope.BalancingTypes = [
    {BalancingTypeId:0, BalancingType:"None"},
    {BalancingTypeId:1, BalancingType:"Cap"},
    {BalancingTypeId:2, BalancingType:"Priority"}
 ];
 
-  $scope.isSelected = 'selected';
+$scope.isSelected = 'selected';
+*/
 
   $scope.cancel = function() {
-       $modalInstance.close();
+    // Reset object to original object
+    // Abandon our copied object
+    $scope.merchant = $scope.original
+
+    $modalInstance.close();
+
+  };
+
+  $scope.updateMerchant = function(merchant) {
+
+    var updateQuery = {
+      "Name":$scope.merchant.Name,
+      "CapLimitNotificationEmails":$scope.merchant.CapLimitNotificationEmails,
+      "Currency":$scope.merchant.Currency
+    };
+
+    //console.log(merchant.Id)
+    //console.log(updateQuery);
+
+    // PUT REQUEST
+    $http({
+      method:'PUT',
+      url:baseUrl + '/midgroups/' + merchant.Id,
+      data:updateQuery
+    }).success(function(status,data) {
+      console.log(data);
+    });
+
   };
 
   $scope.submitMerchantUpdate = function() {

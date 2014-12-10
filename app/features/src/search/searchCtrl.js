@@ -1,9 +1,30 @@
 app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$state,$moment) {
 
+  /////////////////
+  // SINGLE SEARCH 
+  /////////////////
+
+  // Set Default for Search Type DropDown
+  $scope.searchType = 'Single';
+
+  // cache form for queryObj and to clear input fields
+  $scope.search_form = {};
+
+  // Handle Form Submit
+  $scope.submit = function() {
+    console.log('submission');
+  };
+
+
+//-----------------------------------------//
+//-----------------------------------------//
+  /////////////////
+  // GROUP SEARCH 
+  /////////////////
   $scope.oneAtATime = false;
 
   // Create Dropdown Hours
-  /*
+  
   function createHours() {
     $scope.Hours = [];
     // loop to create 00-23 range
@@ -25,11 +46,7 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
     }
   }
   createMins();
-  */
-
   
-  $scope.Hours = [00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
-  $scope.Mins = [00, 05, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
   //////////////////////
   // DATE RANGE SETTINGS
   //////////////////////
@@ -255,10 +272,94 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
   
 }); // END SEARCH CTRL
 
+///////////////////////////////////////
+// DATE PICKER CONTROLS - SINGLE SEARCH
+///////////////////////////////////////
+app.controller('firstdateCtrl', function ($scope) {
 
-/////////////////////////
-// DATE PICKER CONTROLS
-/////////////////////////
+  $scope.today = function() {
+    $scope.fromDate = new Date();
+  };
+  $scope.today();
+
+  $scope.clear = function () {
+    $scope.fromDate = null;
+  };
+
+  // Disable weekend selection
+  /*
+  $scope.disabled = function(date, mode) {
+    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+  };
+  */
+
+  $scope.toggleMin = function() {
+    $scope.minDate = $scope.minDate ? null : new Date();
+  };
+  $scope.toggleMin();
+
+  $scope.open = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.opened = true;
+  };
+
+  $scope.dateOptions = {
+    formatYear: 'yyyy',
+    startingDay: 1
+  };
+
+  $scope.initDate = new Date('2013-15-20');
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[3];
+});
+
+// SECOND DATE CTRL
+app.controller('secdateCtrl', function ($scope) {
+  $scope.today = function() {
+    $scope.toDate = new Date();
+  };
+  $scope.today();
+
+  $scope.clear = function () {
+    $scope.toDate = null;
+  };
+
+  // Disable weekend selection
+  /*
+  $scope.disabled = function(date, mode) {
+    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+  };
+  */
+
+  $scope.toggleMin = function() {
+    $scope.minDate = $scope.minDate ? null : new Date();
+  };
+  $scope.toggleMin();
+
+  $scope.open = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.opened = true;
+  };
+
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+  };
+
+  $scope.initDate = new Date('2012-15-20');
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[3];
+});
+
+
+
+///////////////////////////////////////
+// DATE PICKER CONTROLS - GROUP SEARCH
+///////////////////////////////////////
 
 app.controller('snapstartDateCtrl', function($scope){
 
