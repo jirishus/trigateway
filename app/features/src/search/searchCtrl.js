@@ -133,11 +133,11 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
           //$scope.searchEmail    = $scope.search_form.email;
           //$scope.searchTransID  = $scope.search_form.transID;
           
+         
           $('.panel-options').slideUp(300);
-
-          $('table thead').show(500);
-          $('form.searcher').slideUp(300);
-          $('.search_feedback').slideDown(500);
+          $('table thead').show(300);
+          //$('form.searcher').slideUp(300);
+          $('.search_feedback').slideDown(300);
           $('.container_search_parameters').show();
 
           // CSV EXPORT
@@ -433,8 +433,9 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
   // MODIFY SEARCH
   /////////////////
   $scope.modify_search = function() {
-    //$('.form_wrapper').slideToggle(300);
+    $('.form_wrapper').slideToggle(300);
     $('.panel-options').slideToggle(300);
+    $('.searcher').show(300);
   };
 
   

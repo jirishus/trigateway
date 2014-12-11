@@ -24,8 +24,6 @@ include ../modals/refund_modal.html
                                 
 
         .panel-body
-            //p(ng-show="searchType == 'single'") form 1
-            //p(ng-show="searchType == 'group'") form 2
             .row(ng-show="searchType == 'single'")
                 form.form.searcher(ng-submit="submit()" name="search_form" novalidate)
                     h2.date_title.search_header Date Selection:
@@ -208,27 +206,26 @@ include ../modals/refund_modal.html
                                 span Transaction Search:
 
 
-        .search_feedback
-              .panel.panel-default.table_search_results
-                .panel-heading.search_table_heading
-                    .row
-                        .col-md-6
-                            h2.panel-title Search Results 
-                                span {{resultAmount}}
-                        .col-md-6
-                            a.def_btn.wet_asphalt_btn.float-right(href="" ng-csv="transactionCSV" filename="transactions.csv" ng-show="transactionCSV.length") 
-                                i.fa.fa-file-excel-o
-                                span Export Excel
-                            a.def_btn.belize_hole_btn.float-right.margin-right(tooltip="Begin a new search" tooltip-placement="top" href="" ng-click="new_search()") 
-                                i.fa.fa-search  
-                                span New Search
-                            a.def_btn.peter_river_btn.float-right.margin-right(tooltip="Modify existing search" tooltip-placement="top" href="" ng-click="modform()")
-                                i.fa.fa-search-plus
-                                span Modify Search
-
-                .panel-body
-                    h3.noResults(ng-if="resultAmount == 0") {{'We apologize but there are no results found for your search'}}
-                    include partials/searchTable.jade
+.search_feedback
+      .panel.panel-default.table_search_results
+        .panel-heading.search_table_heading
+            .row
+                .col-md-6
+                    h2.panel-title Search Results 
+                        span {{resultAmount}}
+                .col-md-6
+                    a.def_btn.wet_asphalt_btn.float-right(href="" ng-csv="transactionCSV" filename="transactions.csv" ng-show="transactionCSV.length") 
+                        i.fa.fa-file-excel-o
+                        span Export Excel
+                    a.def_btn.belize_hole_btn.float-right.margin-right(tooltip="Begin a new search" tooltip-placement="top" href="" ng-click="new_search()") 
+                        i.fa.fa-search  
+                        span New Search
+                    a.def_btn.peter_river_btn.float-right.margin-right(tooltip="Modify existing search" tooltip-placement="top" href="" ng-click="modform()")
+                        i.fa.fa-search-plus
+                        span Modify Search
+        .panel-body
+            h3.noResults(ng-if="resultAmount == 0") {{'We apologize but there are no results found for your search'}}
+            include partials/searchTable.jade
 
 
 
