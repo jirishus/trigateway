@@ -99,11 +99,17 @@ include ../modals/removeMidModal.jade
                             span Belongs to {{setGroups(mid)}} Groups
                             ul.floater
                                 li hey there
-                        a.groupAnchor(href="")
+                        //a.groupAnchor(href="")
                             span Belongs to {{setGroups(mid)}} Groups
                             div.floater
                                 ul(ng-repeat="group in groupTip track by $index")
                                     li {{group}}
+                        a.groupAnchor
+                            span Belongs to {{setGroups(mid)}} Groups
+                            div.floater
+                                ol(ng-repeat="group in groupNames[$index] track by $index")
+                                    li {{group.Name}}
+
                                
 
 

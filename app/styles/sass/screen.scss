@@ -24,11 +24,6 @@ body {
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 
-// PANEL STYLING
-.panel {
-  border:0px;
-}
-
 ///////////////
 // OFF-CANVAS
 ///////////////
@@ -484,13 +479,15 @@ a[class*='groupsgroups'] {
   color:#fff;
   display:none;
   position:absolute;
-  text-align:center;
-  padding:10px 0px;
+  padding:10px 0px 10px 40px;
   width:250px;
   top:20px;
   left:-50%;
   min-width:100px;
   z-index:100;
+  ol,ul {
+    list-style:square;
+  }
 }
 
 .add_mid_btn, .add_mid_group_btn, .add_mid_in_group_btn, .add_new_user_btn {

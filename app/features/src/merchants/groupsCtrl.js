@@ -366,21 +366,22 @@ app.controller('editMerchantModalCtrl', function($scope,$http,$modal,$log) {
 // MODAL INSTANCE
 var merchantEditInstanceCtrl = function($scope,$modalInstance,$http,$timeout,merchant,baseUrl,Notify) {
   //console.log(merchant.BalancingType);
-
+ 
   $scope.original = merchant;
   $scope.merchant = angular.copy(merchant);
+
 
 // CURRENCY SERVICE
 $http.get( baseUrl + 'currencies').success(function(data) {
     $scope.currencies = data;
 });
 
-
 $scope.BalancingTypes = [
    {BalancingTypeId:0, BalancingType:"None"},
    {BalancingTypeId:1, BalancingType:"Cap"},
    {BalancingTypeId:2, BalancingType:"Priority"}
 ];
+
 
   $scope.cancel = function() {
     // Reset object to original object
@@ -426,6 +427,7 @@ $scope.BalancingTypes = [
       },2000);
 
     });
+    
     
     
     

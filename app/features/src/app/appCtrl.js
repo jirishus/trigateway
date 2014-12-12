@@ -1,23 +1,22 @@
 app.controller("appCtrl", function($rootScope,$scope,$state,$timeout,$http,baseUrl,Notify) {
 
-  /*
+  
   $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");      
   });
-  */
+  
 
   ///////////////////
-    // LOAD MIDGROUPS
-    ///////////////////
-    $rootScope.modalGroups = [];
+  // LOAD MIDGROUPS
+  ///////////////////
+  $rootScope.modalGroups = [];
 
 
     $http.get(baseUrl + 'midgroups').success(function(data) {
 
       $scope.groupsBulk = data;
       $scope.groupAmount = data.length;
-
 
       // CSV Export
       $scope.groupCSV = data;
@@ -26,9 +25,11 @@ app.controller("appCtrl", function($rootScope,$scope,$state,$timeout,$http,baseU
 
       angular.forEach(data, function(value,key) {
          $rootScope.modalGroups.push(value);
-      });
+      }); 
 
-    });
+  });
+
+
 
 
   //////////////////////

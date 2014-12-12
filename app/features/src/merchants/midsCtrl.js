@@ -270,7 +270,7 @@ var DeleteMidCtrlInstance = function($scope,$modalInstance,$log,mid,$http,Notify
         $modalInstance.close();
     }
 
-    var newQuery = {"enabled":"false"}
+    var newQuery = {"enabled":false};
 
     $scope.disableMID = function() {
 
@@ -278,7 +278,7 @@ var DeleteMidCtrlInstance = function($scope,$modalInstance,$log,mid,$http,Notify
         console.log('Disabling MID');
         
         $http({
-            method:'PUT',
+            method:'PATCH',
             url: baseUrl + 'mids/' + mid.Id,
             data:newQuery
         }).success(function(data,status) {

@@ -341,11 +341,13 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
       // Link the Local-Data with Smart Table's Copy
       //$scope.snapData = $scope.shownSnapData; 
 
-      console.log(data);
+      
       $('.panel-options').slideUp(300);
       $('.snapForm_results').slideDown(300);
-
       $('.snap-panel-options').slideUp(300);
+
+      // CSV EXPORT
+      $scope.transactionCSV = data;
 
     });
 
