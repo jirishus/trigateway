@@ -1,6 +1,6 @@
 include ../modals/mockModal.jade
 
-.row
+//.row
 	.col-md-12
 		table.table
 			thead
@@ -20,6 +20,10 @@ include ../modals/mockModal.jade
 		ul(ng-repeat="User in Users")
 			li {{User.UserName}}
 
-.row
+//.row
 	.col-md-12.jumbotron
 		select.form-control(ng-options="User.company for User in workers" ng-model="selectedItem")
+
+.row
+	.col-md-12
+		

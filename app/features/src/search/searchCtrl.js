@@ -27,12 +27,12 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
 
 
   // Set Default for Search Type 
-  $scope.searchType = 'single';
-  $('.single_format').addClass('activeFormat');
+  $scope.searchType = 'group';
+  $('.group_format').addClass('activeFormat');
   
 
 
-  // cache form for queryObj and to clear input fields
+  // cache form for query and to clear input fields
   $scope.search_form = {};
 
   // Handle Form Submit
@@ -124,7 +124,6 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
             
           } // END else
 
-          //$scope.data = data;
 
           // RESULTS FEEDBACK
           //$scope.resultAmount   = data.length;
@@ -281,6 +280,72 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
   $scope.past90Days = $moment().subtract(90, 'days').format('L');
   $scope.past180Days = $moment().subtract(180, 'days').format('L');
   $scope.past360Days = $moment().subtract(365, 'days').format('L');
+
+  /////////////////////////
+  // SNAP-SHOT FORM SUBMIT
+  /////////////////////////
+  $scope.snapForm = {};
+
+  $scope.snapFormSubmit = function() {
+
+  //set todays date if dates not defined -- ALL OF THIS IN A SERVICE!
+    if ($scope.snapForm.fromDate == undefined){$scope.snapForm.fromDate = new Date();}
+    if ($scope.snapForm.toDate == undefined){$scope.snapForm.toDate = new Date();}
+
+    // Convert Date Format
+    var datefilter = $filter('date'),
+        formatDate = datefilter($scope.snapForm.fromDate,'MM/dd/yyyy'),
+        formatDate2 = datefilter($scope.snapForm.toDate, 'MM/dd/yyyy');
+
+    // TIME SETTINGS
+    $scope.fromDATE = formatDate + ' ' + $scope.fromHours + ':' + $scope.fromMins;
+    $scope.toDATE = formatDate2 + ' ' + $scope.toHours + ':' + $scope.toMins;
+
+    // CHECK FROM TIME
+    if($scope.fromHours && $scope.fromMins) {
+      $scope.FROMDATE = $scope.fromDATE;
+    } else {
+      $scope.FROMDATE = formatDate;
+    }
+    
+    // CHECK TOTIME
+    if($scope.toHours && $scope.fromMins) {
+      $scope.TODATE = $scope.toDATE;
+    } else {
+      $scope.TODATE = formatDate2;
+    }
+
+
+    // QUERY OBJECT
+    snapQuery = {
+      "FromDate":$scope.FROMDATE
+    };
+
+
+    console.log(snapQuery);
+
+    // SEND POST REQUEST
+    $http({
+      method:'POST',
+      url:'http://api.testing.tripayments.com/transactions/snapshot',
+      data:snapQuery
+    }).success(function(data) {
+      
+      // BIND DATA TO SCOPE
+      $scope.snapTrans = data;
+      $scope.snapLen = data.length;
+
+      console.log(data);
+      $('.panel-options').slideUp(300);
+
+    });
+
+
+  }; // END FORM SUBMIT
+
+
+
+
 
   /////////////////////
   // TRANS FORM SUBMIT

@@ -19,6 +19,19 @@ app.controller('mockCtrl', function($scope,$http,baseUrl) {
 
 	};
 
+	var Query = {
+		"FromDate":"11/05/2014"
+	};
+
+	// TEST SNAP SHOT
+	$http({
+		method:'POST',
+		url:'http://api.testing.tripayments.com/transactions/snapshot',
+		data:Query
+	}).success(function(data) {
+		console.log(data);
+	});
+
 });
 
 

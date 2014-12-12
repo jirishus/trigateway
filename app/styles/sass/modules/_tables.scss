@@ -249,9 +249,21 @@ select.editable-input {
     color:$red;
 }
 
-//////////////////
+///////////////
+// SNAP FORM 
+///////////////
+.snapForm_results {
+
+}
+.snapSpan {
+    border-right:1px solid #ccc;
+    padding-right:5px;
+    margin-right:5px;
+}
+
+///////////////
 // TRANS FORM 
-//////////////////
+///////////////
 
 .transForm_feedback {
     display:none;
