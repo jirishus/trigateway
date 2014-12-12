@@ -404,7 +404,7 @@ $scope.BalancingTypes = [
     console.log(updateQuery);
 
     // PUT REQUEST
-    /*
+    
     $http({
       method:'PUT',
       url:baseUrl + '/midgroups/' + merchant.Id,
@@ -426,7 +426,7 @@ $scope.BalancingTypes = [
       },2000);
 
     });
-    */
+    
     
     
 

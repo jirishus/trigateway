@@ -134,6 +134,7 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
           
          
           $('.panel-options').slideUp(300);
+          $('.snap-panel-options').slideUp(300);
           $('table thead').show(300);
           //$('form.searcher').slideUp(300);
           $('.search_feedback').slideDown(300);
@@ -322,6 +323,8 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
       "GatewayId":$scope.snapForm.gateway
     };
 
+    // "ToDate":$scope.TODATE
+
     console.log(snapQuery);
 
     // SEND POST REQUEST
@@ -341,6 +344,8 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
       console.log(data);
       $('.panel-options').slideUp(300);
       $('.snapForm_results').slideDown(300);
+
+      $('.snap-panel-options').slideUp(300);
 
     });
 
@@ -480,6 +485,7 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
 
       $('.panel-options').slideUp(300);
       $('.transForm_feedback').slideDown(300);
+      $('.snap-panel-options').slideUp(300);
 
 
 
@@ -502,9 +508,13 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
   // MODIFY SEARCH
   /////////////////
   $scope.modify_search = function() {
-    $('.form_wrapper').slideToggle(300);
+    //$('.form_wrapper').slideToggle(300);
     $('.panel-options').slideToggle(300);
     $('.searcher').show(300);
+  };
+
+  $scope.modify_snap_search = function() {
+    $('.snap-panel-options').slideToggle(300);
   };
 
   

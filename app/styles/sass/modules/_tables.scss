@@ -57,6 +57,9 @@
             text-decoration:none;
         }
     }
+    .floater {
+        left: -130%;
+    }
 }
 .st-header {
     cursor:pointer;
@@ -254,6 +257,9 @@ select.editable-input {
 ///////////////
 .snapForm_results {
     display:none;
+    i {
+        margin-right:5px;
+    }
 }
 .snapSpan {
     border-right:1px solid #ccc;

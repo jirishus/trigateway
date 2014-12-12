@@ -11,6 +11,8 @@
     margin:15px 0;
 }
 a.search_format {
+    background:#999;
+    color:#fff;
     display: block;
     padding: 15px 10px;
     text-align:center;
@@ -21,7 +23,7 @@ a.search_format {
         text-decoration:none;
     }
 }
-.activeFormat {
+div a.activeFormat {
     background:$in_blue;
     color:#fff !important;
     &:hover {

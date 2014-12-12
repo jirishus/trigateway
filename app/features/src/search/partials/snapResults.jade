@@ -12,7 +12,7 @@
                     a.def_btn.belize_hole_btn.float-right.margin-right(ng-click="new_search()")
                         i.fa.fa-search
                         span New Search
-                    a.def_btn.peter_river_btn.float-right.margin-right(ng-click="modify_search()")
+                    a.def_btn.peter_river_btn.float-right.margin-right(ng-click="modify_snap_search()")
                         i.fa.fa-search-plus
                         span Modify Search
         .panel-body
@@ -44,7 +44,9 @@
 
                 tbody.snapBody
                     tr(ng-repeat="snap in shownSnapData")
-                        td {{snap.MerchantAccount}}
+                        td 
+                            i.fa.fa-search
+                            span {{snap.MerchantAccount}}
                         td 0.00
                         td 
                             span.snapSpan {{snap.Charges.Count}}
