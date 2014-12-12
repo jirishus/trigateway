@@ -318,9 +318,9 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
 
     // QUERY OBJECT
     snapQuery = {
-      "FromDate":$scope.FROMDATE
+      "FromDate":$scope.FROMDATE,
+      "GatewayId":$scope.snapForm.gateway
     };
-
 
     console.log(snapQuery);
 
@@ -332,11 +332,15 @@ app.controller('searchCtrl', function($rootScope,$scope,$http,$filter,baseUrl,$s
     }).success(function(data) {
       
       // BIND DATA TO SCOPE
-      $scope.snapTrans = data;
+      $scope.snapData = data;
       $scope.snapLen = data.length;
+
+      // Link the Local-Data with Smart Table's Copy
+      //$scope.snapData = $scope.shownSnapData; 
 
       console.log(data);
       $('.panel-options').slideUp(300);
+      $('.snapForm_results').slideDown(300);
 
     });
 

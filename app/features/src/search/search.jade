@@ -125,13 +125,12 @@ include ../modals/refund_modal.html
                                     option(value="{{past90Days}}") Past 90 Days
                                     option(value="{{past180Days}}") Past 180 Days
                                     option(value="{{past360Days}}") Past 365 Days
-                            //.col-md-6
+                           
+                        .row
+                            .col-md-4
                                 label Gateway
-                                select.form-control
-                                    option All Platforms Selected
-                                    option platform 1
-                                    option platform 2
-                                    option platform 3
+                                select.form-control(ng-model="snapForm.gateway" ng-options="obj.Id as obj.DisplayName for obj in gateways")
+                                    
                         .row
                             .col-md-12
                                 button.generate_results(type="submit")

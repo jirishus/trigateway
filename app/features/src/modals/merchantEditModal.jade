@@ -28,7 +28,7 @@ script(type="text/ng-template" id="merchantEditContent.html")
 						td
 							input.form-control(ng-model="merchant.CapLimitNotificationEmails")
 						td
-							input.form-control(ng-model="merchant.BalancingType")
+							select.form-control(ng-model="merchant.BalancingType" ng-options="item.BalancingTypeId as item.BalancingType for item in BalancingTypes")
 						td
 							select.form-control(ng-options="item.Id as item.Name for item in currencies" ng-model="merchant.Currency")
 	.userCreateSuccess

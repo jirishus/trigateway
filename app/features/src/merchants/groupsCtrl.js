@@ -364,7 +364,9 @@ app.controller('editMerchantModalCtrl', function($scope,$http,$modal,$log) {
 });
 
 // MODAL INSTANCE
-var merchantEditInstanceCtrl = function($scope,$modalInstance,$http,$timeout,merchant,baseUrl) {
+var merchantEditInstanceCtrl = function($scope,$modalInstance,$http,$timeout,merchant,baseUrl,Notify) {
+  //console.log(merchant.BalancingType);
+
   $scope.original = merchant;
   $scope.merchant = angular.copy(merchant);
 
@@ -373,27 +375,12 @@ $http.get( baseUrl + 'currencies').success(function(data) {
     $scope.currencies = data;
 });
 
-/*
-  $scope.CapValues = [
-  {'value':10},
-  {'value':20},
-  {'value':30},
-  {'value':40},
-  {'value':50},
-  {'value':60},
-  {'value':70},
-  {'value':80},
-  {'value':90},
-];
 
 $scope.BalancingTypes = [
    {BalancingTypeId:0, BalancingType:"None"},
    {BalancingTypeId:1, BalancingType:"Cap"},
    {BalancingTypeId:2, BalancingType:"Priority"}
 ];
-
-$scope.isSelected = 'selected';
-*/
 
   $scope.cancel = function() {
     // Reset object to original object
@@ -409,28 +396,51 @@ $scope.isSelected = 'selected';
     var updateQuery = {
       "Name":$scope.merchant.Name,
       "CapLimitNotificationEmails":$scope.merchant.CapLimitNotificationEmails,
-      "Currency":$scope.merchant.Currency
+      "Currency":$scope.merchant.Currency,
+      "BalancingType":$scope.merchant.BalancingType
     };
 
     //console.log(merchant.Id)
-    //console.log(updateQuery);
+    console.log(updateQuery);
 
     // PUT REQUEST
+    /*
     $http({
       method:'PUT',
       url:baseUrl + '/midgroups/' + merchant.Id,
       data:updateQuery
     }).success(function(status,data) {
-      console.log(data);
+
+       //console.log(data);
+       //console.log('merchant updated');
+
+      // UPDATE LOCAL UI DATA
+      Notify.sendMsg('MerchantUpdated',data);
+
+      // SUCCESS MSG
+      $('.userCreateSuccess').slideDown(300);
+      // HIDE SUCCESS MSG
+      $timeout(function() {
+        $('.userCreateSuccess').slideUp(300);
+        //$modalInstance.close();
+      },2000);
+
     });
+    */
+    
+    
+
 
   };
 
+  /*
   $scope.submitMerchantUpdate = function() {
       $('.merchant_feedback').slideDown(300);
       $('.create_btn').remove();
       $('.save_btn').show();
   };
+  */
+  /*
   $scope.confirmMerchantUpdate = function(id) {
 
     var merchantDetails = {
@@ -476,6 +486,7 @@ $scope.saveUpdate = function(data,id) {
       });
 
 }; // saveUpdate
+*/
 
 
 

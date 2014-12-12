@@ -16,11 +16,11 @@
                         i.fa.fa-search-plus
                         span Modify Search
         .panel-body
-            table.table.table-striped
+            table.table.table-striped(st-table="shownSnapData" st-safe-src="snapData")
                 thead
                     tr
                         th(colspan="7")
-                            input.form-control(type="search" placeholder="Global Search..")
+                            input.form-control(st-search="" type="search" placeholder="Global Search..")
                     tr
                         th Merchant Accounts:
                         th 
@@ -43,7 +43,7 @@
                             span Totals
 
                 tbody.snapBody
-                    tr(ng-repeat="snap in snapTrans")
+                    tr(ng-repeat="snap in shownSnapData")
                         td {{snap.MerchantAccount}}
                         td 0.00
                         td 

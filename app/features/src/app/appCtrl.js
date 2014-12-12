@@ -17,6 +17,8 @@ app.controller("appCtrl", function($rootScope,$scope,$state,$timeout,$http,baseU
 
       $scope.groupsBulk = data;
       $scope.groupAmount = data.length;
+
+
       // CSV Export
       $scope.groupCSV = data;
       // copy the references
@@ -34,6 +36,17 @@ app.controller("appCtrl", function($rootScope,$scope,$state,$timeout,$http,baseU
   //////////////////////
   Notify.getMsg('NewMerchant', function(event,data) {
     $scope.groupsBulk.push(data);
+  });
+
+   //////////////////////
+  // NOTIFY EDIT MERCHANT
+  //////////////////////
+  Notify.getMsg('MerchantUpdated', function(event,data) {
+
+    $http.get(baseUrl + 'midgroups').success(function(data) {
+      $scope.groupsBulk = data;
+    });
+
   });
 
   ///////////////////
@@ -156,7 +169,7 @@ $http.get(baseUrl + 'users').success(function(data) {
   $scope.Users = data;
   $scope.shownUsers = $scope.Users;
 
-  console.log(data);
+  //console.log(data);
   
   // CSV Export
   $scope.usersCSV = data;
