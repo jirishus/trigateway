@@ -1,8 +1,8 @@
-app.controller('mockCtrl', function($scope,$http,baseUrl) {
+app.controller('mockCtrl', function($scope,$http,baseUrl,$state,$rootScope) {
 	
 
 	// LOAD DATA
-	$http.get('http://blooming-headland-9730.herokuapp.com:80/api/workers').success(function(data) {
+	$http.get('http://blooming-headland-9730.herokuapp.com/api/workers').success(function(data) {
 		// BIND TO LOCAL COLLECTION
 		$scope.workers = data;
 
@@ -11,26 +11,27 @@ app.controller('mockCtrl', function($scope,$http,baseUrl) {
 
 	});
 
+	$rootScope.BalancingTypes = [
+		   {BalancingTypeId:0, BalancingType:"None"},
+		   {BalancingTypeId:1, BalancingType:"Cap"},
+		   {BalancingTypeId:2, BalancingType:"Priority"}
+	];
+
 	// EDIT ACTION
 	$scope.doEdit = function(worker) {
 		
-		//$scope.selectedItem = worker;
-		console.log('processing update');
+		//$scope.selectedItem = worker
+		console.log(worker);
+		// TRANSITION STATE TO EDIT MODE
+		$state.go('app.single');
+		// BIND SELECTED WORKER TO SINGLE SCOPE
+		$rootScope.chosenWorker = worker;
+
+
 
 	};
 
-	var Query = {
-		"FromDate":"11/05/2014"
-	};
-
-	// TEST SNAP SHOT
-	$http({
-		method:'POST',
-		url:'http://api.testing.tripayments.com/transactions/snapshot',
-		data:Query
-	}).success(function(data) {
-		console.log(data);
-	});
+	
 
 });
 
