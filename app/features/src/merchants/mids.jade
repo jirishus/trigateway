@@ -80,10 +80,13 @@ include ../modals/removeMidModal.jade
                             span {{mid.CapUtilizationPercentage}} %
                     td 
                         //span.success {{getStatus(mid)}}
-                        span(ng-class="(mid.Active) ? 'success' : 'failed' ") {{getStatus(mid)}}
+                        //span(ng-class="(mid.Active) ? 'success' : 'failed' ") {{getStatus(mid)}}
+                        tri-status(status="{{mid.Active}}" ng-class="(mid.Active) ? 'success' : 'failed' ")
                     //td {{mid.PaymentTypeIds}}
+
                     td.paymentTypes {{doShit(mid)}} 
                         span(ng-bind-html="payments") {{payments}}
+
                     //td.paymentTypes
                         i.fa.fa-cc-visa.fa-2x
                         i.fa.fa-cc-discover.fa-2x
@@ -104,11 +107,12 @@ include ../modals/removeMidModal.jade
                             div.floater
                                 ul(ng-repeat="group in groupTip track by $index")
                                     li {{group}}
-                        a.groupAnchor
+                        //a.groupAnchor
                             span Belongs to {{setGroups(mid)}} Groups
                             div.floater
                                 ol(ng-repeat="group in groupNames[$index] track by $index")
                                     li {{group.Name}}
+                        tri-group
 
                                
 

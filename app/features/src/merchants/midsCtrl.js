@@ -1,34 +1,6 @@
-/*
-app.controller('midsCtrl', function($scope) {
-    
-    console.log('midsCtrl');
-
-});
-
-app.controller('midCreateModal', function($scope) {
-
-});
-
-app.controller('editMidModalCtrl', function($scope) {
-
-});
-
-app.controller('DeleteMidCtrl', function($scope) {
-
-});
-
-app.controller('EnableMidCtrl', function($scope) {
-
-});
-
-app.controller('removeMidModal', function($scope) {
-
-});
-*/
-
 app.controller('midsCtrl', function($scope,$http,Notify) {
 
-
+    /*
     $scope.setGroups = function(mid) {
             var Glen = mid.GroupMembership;
             var bucket = [];   
@@ -60,82 +32,69 @@ app.controller('midsCtrl', function($scope,$http,Notify) {
 
             return bucket.length;
     } // END setGroups
+    */
 
 
     $scope.showRolloverParents = function(mid) {
 
-        var parents = mid.RolloverParents;
-        var parentNames = [];
+        if(mid) {
+            var parents = mid.RolloverParents;
+            var parentNames = [];
 
-        for(var i in parents) {
-            if(parents.hasOwnProperty(i)) {
-                parentNames.push(parents[i]);
+            for(var i in parents) {
+                if(parents.hasOwnProperty(i)) {
+                    parentNames.push(parents[i]);
+                }
             }
+
+            $scope.rollGroups = parentNames;
+            // log results
+            return parentNames.length;
         }
-
-        $scope.rollGroups = parentNames;
-        // log results
-        return parentNames.length;
-
-    }
+    }   
 
     
 
     
     $scope.doShit = function(mid) {
-        var payments = mid.PaymentTypeIds;
 
-        //$scope.payments = '<i class="fa fa-cc-discover fa-2x"></i>' + '<i class="fa fa-cc-visa fa-2x"></i>' + '<i class="fa fa-cc-amex fa-2x"></i>';
-        //console.log(mid.PaymentTypes);
-        
+        if(mid) {
+
+            var payments = mid.PaymentTypeIds;
+
+            //$scope.payments = '<i class="fa fa-cc-discover fa-2x"></i>' + '<i class="fa fa-cc-visa fa-2x"></i>' + '<i class="fa fa-cc-amex fa-2x"></i>';
+            //console.log(mid.PaymentTypes);
+            
 
 
-        $scope.cards = [];
-        $scope.payments = '';
+            $scope.cards = [];
+            $scope.payments = '';
 
-        for(var prop in mid.PaymentTypes) {
-            var result = mid.PaymentTypes[prop];
-            $scope.cards.push(result);
+            for(var prop in mid.PaymentTypes) {
+                var result = mid.PaymentTypes[prop];
+                $scope.cards.push(result);
+            }
+
+            
+            for(var i=0;i<$scope.cards.length;i++) {
+                //console.log($scope.cards[i]);
+                if($scope.cards[i] === 'Discover') {
+                    $scope.payments += '<i class="fa fa-cc-discover fa-2x"></i>';
+                }
+                if($scope.cards[i] === 'Visa') {
+                    $scope.payments += '<i class="fa fa-cc-visa fa-2x"></i>';
+                }
+                if($scope.cards[i] == 'Mastercard') {
+                    $scope.payments += '<i class="fa fa-cc-mastercard fa-2x"></i>';
+                }
+                if($scope.cards[i] == 'American Express') {
+                    $scope.payments += '<i class="fa fa-cc-amex fa-2x"></i>';   
+                }
+            }
+
         }
-
-        
-        for(var i=0;i<$scope.cards.length;i++) {
-            //console.log($scope.cards[i]);
-            if($scope.cards[i] === 'Discover') {
-                $scope.payments += '<i class="fa fa-cc-discover fa-2x"></i>';
-            }
-            if($scope.cards[i] === 'Visa') {
-                $scope.payments += '<i class="fa fa-cc-visa fa-2x"></i>';
-            }
-            if($scope.cards[i] == 'Mastercard') {
-                $scope.payments += '<i class="fa fa-cc-mastercard fa-2x"></i>';
-            }
-            if($scope.cards[i] == 'American Express') {
-                $scope.payments += '<i class="fa fa-cc-amex fa-2x"></i>';   
-            }
-        }
-
-
 
     }
-    
-    
-
-    ///////////////////////////
-    //  STATUS CONVERSION
-    ///////////////////////////
-    $scope.getStatus = function(mid) {
-            
-            if(mid.Active) {
-                return 'Active';
-                
-            } else {
-                return 'Inactive';
-                
-            }
-            
-    } // END getStatus
-
     
 
 });

@@ -1,3 +1,56 @@
+///////////////////
+// MID STATUS 
+///////////////////
+app.directive('triStatus', function() {
+  return {
+    restrict:'E',
+    replace:true,
+    template:'<p>{{statusResult}}</p>',
+    link:function(scope,elem,attrs) {
+      
+      // SET STATUS TXT
+      (attrs.status === 'true') ? scope.statusResult = 'Active' : scope.statusResult = 'Inactive'; 
+      
+    }
+  };
+});
+
+/////////////////////
+// MID GROUP PROFILE
+/////////////////////
+app.directive('triGroup', function() {
+  return {
+    restrict:'E',
+    replace:false,
+    templateUrl:'/features/dest/merchants/partials/group_profile.html',
+    link:function(scope,elem,attrs) {
+      
+      // IF MID HAS LOADED (!undefined)
+      if(scope.mid) {
+        
+        scope.groupNames = [];
+        scope.groupLen = scope.mid.GroupMembership.length;
+
+        groupLen = scope.mid.GroupMembership.length;
+        for(var i=0;i<groupLen;i++) {
+          scope.groupNames.push(scope.mid.GroupMembership[i]);
+        }
+
+
+      }
+
+    }
+
+  }
+});
+
+
+
+
+
+
+
+
 /*
 app.directive('updateTitle', function($rootScope) {
   return {
@@ -14,7 +67,7 @@ app.directive('updateTitle', function($rootScope) {
   }
 });
 */
-
+/*
 app.directive('triPopover', function() {
   return {
     templateUrl:'pop-content.html'
@@ -42,20 +95,19 @@ app.directive('probIt', function() {
       var dataset = elem[0];
       var log = [];
       //console.log(angular.isObject(dataset));
-      /*
+      
       angular.forEach(dataset, function(value, key) {
         this.push(key + ': ' + value);
       }, log);
-
-      console.log(log); 
-      */
+      
 
     }
   }
 });
-
+*/
 
 // POPOVER directive
+/*
 app.directive('myDir', function() {
   return {
      restrict:'A',
@@ -89,12 +141,13 @@ app.directive('myDir', function() {
   }
 
 }); // END myDir
-
+*/
+/*
 app.directive('popLister', function() {
   return {
     restrict:'A',
     scope:{clientsArray:'='},
-    /*template:'<div ng-repeat="client in clientsArray">{{putGroups()}}</div>' + 'View Groups',*/
+    
     template:'<p>View Groups</p>' + '<ul class="floater"><li ng-repeat="client in clientsArray">{{getStuff(client)}}</li></ul>',
     link:function(scope,el,attrs) {
       // MOUSE ENTER
@@ -116,8 +169,9 @@ app.directive('popLister', function() {
     }
   }
 });
-
+*/
 // groupAnchor directive
+/*
 app.directive('popSet', function() {
   return {
     restrict:'A',
@@ -125,24 +179,26 @@ app.directive('popSet', function() {
     link:function(scope,el,attrs) {
 
         el.bind('mouseenter', function() {
-          /*
+          
           var infoPop = el.find('div');
           infoPop.css('display','block');      
-          */
+          
         });
 
         el.bind('mouseleave', function() {
-          /*
+          
           var infoPop = el.find('div');
           infoPop.css('display','none');
-          */
+          
         });
 
     }
   }
 });
+*/
 
 // scroll directive
+/*
 app.directive('testScroll', function($document) {
   return {
     restrict:'E',
@@ -157,18 +213,19 @@ app.directive('testScroll', function($document) {
         var top = $(window).scrollTop();
         console.log(top);
       });
-      /*
+      
       masterView.bind('scroll', function() {
         
         //scope.$apply(attrs.testScroll);
         //console.log(scope.$apply(attrs.testScroll));
         
       });
-      */
+      
 
     }
   }
 });
+*/
 
 ///////////////////////
 // FILTER PAYMENT TYPE
